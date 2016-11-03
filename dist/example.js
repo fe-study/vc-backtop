@@ -4,9 +4,9 @@
 	else if(typeof define === 'function' && define.amd)
 		define([], factory);
 	else if(typeof exports === 'object')
-		exports["VueComponentDemo"] = factory();
+		exports["vcBacktop"] = factory();
 	else
-		root["VueComponentDemo"] = factory();
+		root["vcBacktop"] = factory();
 })(this, function() {
 return /******/ (function(modules) { // webpackBootstrap
 /******/ 	// The module cache
@@ -71,554 +71,12 @@ return /******/ (function(modules) { // webpackBootstrap
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 78);
+/******/ 	return __webpack_require__(__webpack_require__.s = 12);
 /******/ })
 /************************************************************************/
 /******/ ([
-/* 0 */
-/***/ function(module, exports) {
-
-// https://github.com/zloirock/core-js/issues/86#issuecomment-115759028
-var global = module.exports = typeof window != 'undefined' && window.Math == Math
-  ? window : typeof self != 'undefined' && self.Math == Math ? self : Function('return this')();
-if(typeof __g == 'number')__g = global; // eslint-disable-line no-undef
-
-/***/ },
+/* 0 */,
 /* 1 */
-/***/ function(module, exports, __webpack_require__) {
-
-// Thank's IE8 for his funny defineProperty
-module.exports = !__webpack_require__(9)(function(){
-  return Object.defineProperty({}, 'a', {get: function(){ return 7; }}).a != 7;
-});
-
-/***/ },
-/* 2 */
-/***/ function(module, exports) {
-
-var hasOwnProperty = {}.hasOwnProperty;
-module.exports = function(it, key){
-  return hasOwnProperty.call(it, key);
-};
-
-/***/ },
-/* 3 */
-/***/ function(module, exports, __webpack_require__) {
-
-var anObject       = __webpack_require__(8)
-  , IE8_DOM_DEFINE = __webpack_require__(29)
-  , toPrimitive    = __webpack_require__(24)
-  , dP             = Object.defineProperty;
-
-exports.f = __webpack_require__(1) ? Object.defineProperty : function defineProperty(O, P, Attributes){
-  anObject(O);
-  P = toPrimitive(P, true);
-  anObject(Attributes);
-  if(IE8_DOM_DEFINE)try {
-    return dP(O, P, Attributes);
-  } catch(e){ /* empty */ }
-  if('get' in Attributes || 'set' in Attributes)throw TypeError('Accessors not supported!');
-  if('value' in Attributes)O[P] = Attributes.value;
-  return O;
-};
-
-/***/ },
-/* 4 */
-/***/ function(module, exports, __webpack_require__) {
-
-// to indexed object, toObject with fallback for non-array-like ES3 strings
-var IObject = __webpack_require__(51)
-  , defined = __webpack_require__(14);
-module.exports = function(it){
-  return IObject(defined(it));
-};
-
-/***/ },
-/* 5 */
-/***/ function(module, exports, __webpack_require__) {
-
-var dP         = __webpack_require__(3)
-  , createDesc = __webpack_require__(12);
-module.exports = __webpack_require__(1) ? function(object, key, value){
-  return dP.f(object, key, createDesc(1, value));
-} : function(object, key, value){
-  object[key] = value;
-  return object;
-};
-
-/***/ },
-/* 6 */
-/***/ function(module, exports, __webpack_require__) {
-
-var store      = __webpack_require__(22)('wks')
-  , uid        = __webpack_require__(13)
-  , Symbol     = __webpack_require__(0).Symbol
-  , USE_SYMBOL = typeof Symbol == 'function';
-
-var $exports = module.exports = function(name){
-  return store[name] || (store[name] =
-    USE_SYMBOL && Symbol[name] || (USE_SYMBOL ? Symbol : uid)('Symbol.' + name));
-};
-
-$exports.store = store;
-
-/***/ },
-/* 7 */
-/***/ function(module, exports) {
-
-var core = module.exports = {version: '2.4.0'};
-if(typeof __e == 'number')__e = core; // eslint-disable-line no-undef
-
-/***/ },
-/* 8 */
-/***/ function(module, exports, __webpack_require__) {
-
-var isObject = __webpack_require__(10);
-module.exports = function(it){
-  if(!isObject(it))throw TypeError(it + ' is not an object!');
-  return it;
-};
-
-/***/ },
-/* 9 */
-/***/ function(module, exports) {
-
-module.exports = function(exec){
-  try {
-    return !!exec();
-  } catch(e){
-    return true;
-  }
-};
-
-/***/ },
-/* 10 */
-/***/ function(module, exports) {
-
-module.exports = function(it){
-  return typeof it === 'object' ? it !== null : typeof it === 'function';
-};
-
-/***/ },
-/* 11 */
-/***/ function(module, exports, __webpack_require__) {
-
-// 19.1.2.14 / 15.2.3.14 Object.keys(O)
-var $keys       = __webpack_require__(34)
-  , enumBugKeys = __webpack_require__(15);
-
-module.exports = Object.keys || function keys(O){
-  return $keys(O, enumBugKeys);
-};
-
-/***/ },
-/* 12 */
-/***/ function(module, exports) {
-
-module.exports = function(bitmap, value){
-  return {
-    enumerable  : !(bitmap & 1),
-    configurable: !(bitmap & 2),
-    writable    : !(bitmap & 4),
-    value       : value
-  };
-};
-
-/***/ },
-/* 13 */
-/***/ function(module, exports) {
-
-var id = 0
-  , px = Math.random();
-module.exports = function(key){
-  return 'Symbol('.concat(key === undefined ? '' : key, ')_', (++id + px).toString(36));
-};
-
-/***/ },
-/* 14 */
-/***/ function(module, exports) {
-
-// 7.2.1 RequireObjectCoercible(argument)
-module.exports = function(it){
-  if(it == undefined)throw TypeError("Can't call method on  " + it);
-  return it;
-};
-
-/***/ },
-/* 15 */
-/***/ function(module, exports) {
-
-// IE 8- don't enum bug keys
-module.exports = (
-  'constructor,hasOwnProperty,isPrototypeOf,propertyIsEnumerable,toLocaleString,toString,valueOf'
-).split(',');
-
-/***/ },
-/* 16 */
-/***/ function(module, exports, __webpack_require__) {
-
-var global    = __webpack_require__(0)
-  , core      = __webpack_require__(7)
-  , ctx       = __webpack_require__(48)
-  , hide      = __webpack_require__(5)
-  , PROTOTYPE = 'prototype';
-
-var $export = function(type, name, source){
-  var IS_FORCED = type & $export.F
-    , IS_GLOBAL = type & $export.G
-    , IS_STATIC = type & $export.S
-    , IS_PROTO  = type & $export.P
-    , IS_BIND   = type & $export.B
-    , IS_WRAP   = type & $export.W
-    , exports   = IS_GLOBAL ? core : core[name] || (core[name] = {})
-    , expProto  = exports[PROTOTYPE]
-    , target    = IS_GLOBAL ? global : IS_STATIC ? global[name] : (global[name] || {})[PROTOTYPE]
-    , key, own, out;
-  if(IS_GLOBAL)source = name;
-  for(key in source){
-    // contains in native
-    own = !IS_FORCED && target && target[key] !== undefined;
-    if(own && key in exports)continue;
-    // export native or passed
-    out = own ? target[key] : source[key];
-    // prevent global pollution for namespaces
-    exports[key] = IS_GLOBAL && typeof target[key] != 'function' ? source[key]
-    // bind timers to global for call from export context
-    : IS_BIND && own ? ctx(out, global)
-    // wrap global constructors for prevent change them in library
-    : IS_WRAP && target[key] == out ? (function(C){
-      var F = function(a, b, c){
-        if(this instanceof C){
-          switch(arguments.length){
-            case 0: return new C;
-            case 1: return new C(a);
-            case 2: return new C(a, b);
-          } return new C(a, b, c);
-        } return C.apply(this, arguments);
-      };
-      F[PROTOTYPE] = C[PROTOTYPE];
-      return F;
-    // make static versions for prototype methods
-    })(out) : IS_PROTO && typeof out == 'function' ? ctx(Function.call, out) : out;
-    // export proto methods to core.%CONSTRUCTOR%.methods.%NAME%
-    if(IS_PROTO){
-      (exports.virtual || (exports.virtual = {}))[key] = out;
-      // export proto methods to core.%CONSTRUCTOR%.prototype.%NAME%
-      if(type & $export.R && expProto && !expProto[key])hide(expProto, key, out);
-    }
-  }
-};
-// type bitmap
-$export.F = 1;   // forced
-$export.G = 2;   // global
-$export.S = 4;   // static
-$export.P = 8;   // proto
-$export.B = 16;  // bind
-$export.W = 32;  // wrap
-$export.U = 64;  // safe
-$export.R = 128; // real proto method for `library` 
-module.exports = $export;
-
-/***/ },
-/* 17 */
-/***/ function(module, exports) {
-
-module.exports = {};
-
-/***/ },
-/* 18 */
-/***/ function(module, exports) {
-
-module.exports = true;
-
-/***/ },
-/* 19 */
-/***/ function(module, exports) {
-
-exports.f = {}.propertyIsEnumerable;
-
-/***/ },
-/* 20 */
-/***/ function(module, exports, __webpack_require__) {
-
-var def = __webpack_require__(3).f
-  , has = __webpack_require__(2)
-  , TAG = __webpack_require__(6)('toStringTag');
-
-module.exports = function(it, tag, stat){
-  if(it && !has(it = stat ? it : it.prototype, TAG))def(it, TAG, {configurable: true, value: tag});
-};
-
-/***/ },
-/* 21 */
-/***/ function(module, exports, __webpack_require__) {
-
-var shared = __webpack_require__(22)('keys')
-  , uid    = __webpack_require__(13);
-module.exports = function(key){
-  return shared[key] || (shared[key] = uid(key));
-};
-
-/***/ },
-/* 22 */
-/***/ function(module, exports, __webpack_require__) {
-
-var global = __webpack_require__(0)
-  , SHARED = '__core-js_shared__'
-  , store  = global[SHARED] || (global[SHARED] = {});
-module.exports = function(key){
-  return store[key] || (store[key] = {});
-};
-
-/***/ },
-/* 23 */
-/***/ function(module, exports) {
-
-// 7.1.4 ToInteger
-var ceil  = Math.ceil
-  , floor = Math.floor;
-module.exports = function(it){
-  return isNaN(it = +it) ? 0 : (it > 0 ? floor : ceil)(it);
-};
-
-/***/ },
-/* 24 */
-/***/ function(module, exports, __webpack_require__) {
-
-// 7.1.1 ToPrimitive(input [, PreferredType])
-var isObject = __webpack_require__(10);
-// instead of the ES6 spec version, we didn't implement @@toPrimitive case
-// and the second argument - flag - preferred type is a string
-module.exports = function(it, S){
-  if(!isObject(it))return it;
-  var fn, val;
-  if(S && typeof (fn = it.toString) == 'function' && !isObject(val = fn.call(it)))return val;
-  if(typeof (fn = it.valueOf) == 'function' && !isObject(val = fn.call(it)))return val;
-  if(!S && typeof (fn = it.toString) == 'function' && !isObject(val = fn.call(it)))return val;
-  throw TypeError("Can't convert object to primitive value");
-};
-
-/***/ },
-/* 25 */
-/***/ function(module, exports, __webpack_require__) {
-
-var global         = __webpack_require__(0)
-  , core           = __webpack_require__(7)
-  , LIBRARY        = __webpack_require__(18)
-  , wksExt         = __webpack_require__(26)
-  , defineProperty = __webpack_require__(3).f;
-module.exports = function(name){
-  var $Symbol = core.Symbol || (core.Symbol = LIBRARY ? {} : global.Symbol || {});
-  if(name.charAt(0) != '_' && !(name in $Symbol))defineProperty($Symbol, name, {value: wksExt.f(name)});
-};
-
-/***/ },
-/* 26 */
-/***/ function(module, exports, __webpack_require__) {
-
-exports.f = __webpack_require__(6);
-
-/***/ },
-/* 27 */
-/***/ function(module, exports) {
-
-var toString = {}.toString;
-
-module.exports = function(it){
-  return toString.call(it).slice(8, -1);
-};
-
-/***/ },
-/* 28 */
-/***/ function(module, exports, __webpack_require__) {
-
-var isObject = __webpack_require__(10)
-  , document = __webpack_require__(0).document
-  // in old IE typeof document.createElement is 'object'
-  , is = isObject(document) && isObject(document.createElement);
-module.exports = function(it){
-  return is ? document.createElement(it) : {};
-};
-
-/***/ },
-/* 29 */
-/***/ function(module, exports, __webpack_require__) {
-
-module.exports = !__webpack_require__(1) && !__webpack_require__(9)(function(){
-  return Object.defineProperty(__webpack_require__(28)('div'), 'a', {get: function(){ return 7; }}).a != 7;
-});
-
-/***/ },
-/* 30 */
-/***/ function(module, exports, __webpack_require__) {
-
-"use strict";
-'use strict';
-var LIBRARY        = __webpack_require__(18)
-  , $export        = __webpack_require__(16)
-  , redefine       = __webpack_require__(35)
-  , hide           = __webpack_require__(5)
-  , has            = __webpack_require__(2)
-  , Iterators      = __webpack_require__(17)
-  , $iterCreate    = __webpack_require__(53)
-  , setToStringTag = __webpack_require__(20)
-  , getPrototypeOf = __webpack_require__(60)
-  , ITERATOR       = __webpack_require__(6)('iterator')
-  , BUGGY          = !([].keys && 'next' in [].keys()) // Safari has buggy iterators w/o `next`
-  , FF_ITERATOR    = '@@iterator'
-  , KEYS           = 'keys'
-  , VALUES         = 'values';
-
-var returnThis = function(){ return this; };
-
-module.exports = function(Base, NAME, Constructor, next, DEFAULT, IS_SET, FORCED){
-  $iterCreate(Constructor, NAME, next);
-  var getMethod = function(kind){
-    if(!BUGGY && kind in proto)return proto[kind];
-    switch(kind){
-      case KEYS: return function keys(){ return new Constructor(this, kind); };
-      case VALUES: return function values(){ return new Constructor(this, kind); };
-    } return function entries(){ return new Constructor(this, kind); };
-  };
-  var TAG        = NAME + ' Iterator'
-    , DEF_VALUES = DEFAULT == VALUES
-    , VALUES_BUG = false
-    , proto      = Base.prototype
-    , $native    = proto[ITERATOR] || proto[FF_ITERATOR] || DEFAULT && proto[DEFAULT]
-    , $default   = $native || getMethod(DEFAULT)
-    , $entries   = DEFAULT ? !DEF_VALUES ? $default : getMethod('entries') : undefined
-    , $anyNative = NAME == 'Array' ? proto.entries || $native : $native
-    , methods, key, IteratorPrototype;
-  // Fix native
-  if($anyNative){
-    IteratorPrototype = getPrototypeOf($anyNative.call(new Base));
-    if(IteratorPrototype !== Object.prototype){
-      // Set @@toStringTag to native iterators
-      setToStringTag(IteratorPrototype, TAG, true);
-      // fix for some old engines
-      if(!LIBRARY && !has(IteratorPrototype, ITERATOR))hide(IteratorPrototype, ITERATOR, returnThis);
-    }
-  }
-  // fix Array#{values, @@iterator}.name in V8 / FF
-  if(DEF_VALUES && $native && $native.name !== VALUES){
-    VALUES_BUG = true;
-    $default = function values(){ return $native.call(this); };
-  }
-  // Define iterator
-  if((!LIBRARY || FORCED) && (BUGGY || VALUES_BUG || !proto[ITERATOR])){
-    hide(proto, ITERATOR, $default);
-  }
-  // Plug for library
-  Iterators[NAME] = $default;
-  Iterators[TAG]  = returnThis;
-  if(DEFAULT){
-    methods = {
-      values:  DEF_VALUES ? $default : getMethod(VALUES),
-      keys:    IS_SET     ? $default : getMethod(KEYS),
-      entries: $entries
-    };
-    if(FORCED)for(key in methods){
-      if(!(key in proto))redefine(proto, key, methods[key]);
-    } else $export($export.P + $export.F * (BUGGY || VALUES_BUG), NAME, methods);
-  }
-  return methods;
-};
-
-/***/ },
-/* 31 */
-/***/ function(module, exports, __webpack_require__) {
-
-// 19.1.2.2 / 15.2.3.5 Object.create(O [, Properties])
-var anObject    = __webpack_require__(8)
-  , dPs         = __webpack_require__(57)
-  , enumBugKeys = __webpack_require__(15)
-  , IE_PROTO    = __webpack_require__(21)('IE_PROTO')
-  , Empty       = function(){ /* empty */ }
-  , PROTOTYPE   = 'prototype';
-
-// Create object with fake `null` prototype: use iframe Object with cleared prototype
-var createDict = function(){
-  // Thrash, waste and sodomy: IE GC bug
-  var iframe = __webpack_require__(28)('iframe')
-    , i      = enumBugKeys.length
-    , lt     = '<'
-    , gt     = '>'
-    , iframeDocument;
-  iframe.style.display = 'none';
-  __webpack_require__(50).appendChild(iframe);
-  iframe.src = 'javascript:'; // eslint-disable-line no-script-url
-  // createDict = iframe.contentWindow.Object;
-  // html.removeChild(iframe);
-  iframeDocument = iframe.contentWindow.document;
-  iframeDocument.open();
-  iframeDocument.write(lt + 'script' + gt + 'document.F=Object' + lt + '/script' + gt);
-  iframeDocument.close();
-  createDict = iframeDocument.F;
-  while(i--)delete createDict[PROTOTYPE][enumBugKeys[i]];
-  return createDict();
-};
-
-module.exports = Object.create || function create(O, Properties){
-  var result;
-  if(O !== null){
-    Empty[PROTOTYPE] = anObject(O);
-    result = new Empty;
-    Empty[PROTOTYPE] = null;
-    // add "__proto__" for Object.getPrototypeOf polyfill
-    result[IE_PROTO] = O;
-  } else result = createDict();
-  return Properties === undefined ? result : dPs(result, Properties);
-};
-
-
-/***/ },
-/* 32 */
-/***/ function(module, exports, __webpack_require__) {
-
-// 19.1.2.7 / 15.2.3.4 Object.getOwnPropertyNames(O)
-var $keys      = __webpack_require__(34)
-  , hiddenKeys = __webpack_require__(15).concat('length', 'prototype');
-
-exports.f = Object.getOwnPropertyNames || function getOwnPropertyNames(O){
-  return $keys(O, hiddenKeys);
-};
-
-/***/ },
-/* 33 */
-/***/ function(module, exports) {
-
-exports.f = Object.getOwnPropertySymbols;
-
-/***/ },
-/* 34 */
-/***/ function(module, exports, __webpack_require__) {
-
-var has          = __webpack_require__(2)
-  , toIObject    = __webpack_require__(4)
-  , arrayIndexOf = __webpack_require__(47)(false)
-  , IE_PROTO     = __webpack_require__(21)('IE_PROTO');
-
-module.exports = function(object, names){
-  var O      = toIObject(object)
-    , i      = 0
-    , result = []
-    , key;
-  for(key in O)if(key != IE_PROTO)has(O, key) && result.push(key);
-  // Don't enum bug & hidden keys
-  while(names.length > i)if(has(O, key = names[i++])){
-    ~arrayIndexOf(result, key) || result.push(key);
-  }
-  return result;
-};
-
-/***/ },
-/* 35 */
-/***/ function(module, exports, __webpack_require__) {
-
-module.exports = __webpack_require__(5);
-
-/***/ },
-/* 36 */
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -10696,740 +10154,29 @@ setTimeout(function () {
 }, 0);
 
 module.exports = Vue;
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(39), __webpack_require__(38)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(9), __webpack_require__(3)))
 
 /***/ },
-/* 37 */
+/* 2 */
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
-/* WEBPACK VAR INJECTION */(function(module) {var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;'use strict';
+'use strict';
 
-var _stringify = __webpack_require__(73);
-
-var _stringify2 = _interopRequireDefault2(_stringify);
-
-var _defineProperty = __webpack_require__(74);
-
-var _defineProperty2 = _interopRequireDefault2(_defineProperty);
-
-var _typeof2 = __webpack_require__(77);
-
-var _typeof3 = _interopRequireDefault2(_typeof2);
-
-function _interopRequireDefault2(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-(function webpackUniversalModuleDefinition(root, factory) {
-	if (( false ? 'undefined' : (0, _typeof3.default)(exports)) === 'object' && ( false ? 'undefined' : (0, _typeof3.default)(module)) === 'object') module.exports = factory();else if (true) !(__WEBPACK_AMD_DEFINE_ARRAY__ = [], __WEBPACK_AMD_DEFINE_FACTORY__ = (factory), __WEBPACK_AMD_DEFINE_RESULT__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ? (__WEBPACK_AMD_DEFINE_FACTORY__.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__)) : __WEBPACK_AMD_DEFINE_FACTORY__), __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));else if ((typeof exports === 'undefined' ? 'undefined' : (0, _typeof3.default)(exports)) === 'object') exports["VueComponentsName"] = factory();else root["VueComponentsName"] = factory();
-})(undefined, function () {
-	return (/******/function (modules) {
-			// webpackBootstrap
-			/******/ // The module cache
-			/******/var installedModules = {};
-			/******/
-			/******/ // The require function
-			/******/function __webpack_require__(moduleId) {
-				/******/
-				/******/ // Check if module is in cache
-				/******/if (installedModules[moduleId])
-					/******/return installedModules[moduleId].exports;
-				/******/
-				/******/ // Create a new module (and put it into the cache)
-				/******/var module = installedModules[moduleId] = {
-					/******/i: moduleId,
-					/******/l: false,
-					/******/exports: {}
-					/******/ };
-				/******/
-				/******/ // Execute the module function
-				/******/modules[moduleId].call(module.exports, module, module.exports, __webpack_require__);
-				/******/
-				/******/ // Flag the module as loaded
-				/******/module.l = true;
-				/******/
-				/******/ // Return the exports of the module
-				/******/return module.exports;
-				/******/
-			}
-			/******/
-			/******/
-			/******/ // expose the modules object (__webpack_modules__)
-			/******/__webpack_require__.m = modules;
-			/******/
-			/******/ // expose the module cache
-			/******/__webpack_require__.c = installedModules;
-			/******/
-			/******/ // identity function for calling harmory imports with the correct context
-			/******/__webpack_require__.i = function (value) {
-				return value;
-			};
-			/******/
-			/******/ // define getter function for harmory exports
-			/******/__webpack_require__.d = function (exports, name, getter) {
-				/******/(0, _defineProperty2.default)(exports, name, {
-					/******/configurable: false,
-					/******/enumerable: true,
-					/******/get: getter
-					/******/ });
-				/******/
-			};
-			/******/
-			/******/ // getDefaultExport function for compatibility with non-harmony modules
-			/******/__webpack_require__.n = function (module) {
-				/******/var getter = module && module.__esModule ?
-				/******/function getDefault() {
-					return module['default'];
-				} :
-				/******/function getModuleExports() {
-					return module;
-				};
-				/******/__webpack_require__.d(getter, 'a', getter);
-				/******/return getter;
-				/******/
-			};
-			/******/
-			/******/ // Object.prototype.hasOwnProperty.call
-			/******/__webpack_require__.o = function (object, property) {
-				return Object.prototype.hasOwnProperty.call(object, property);
-			};
-			/******/
-			/******/ // __webpack_public_path__
-			/******/__webpack_require__.p = "/";
-			/******/
-			/******/ // Load entry module and return exports
-			/******/return __webpack_require__(__webpack_require__.s = 8);
-			/******/
-		}(
-		/************************************************************************/
-		/******/[,
-		/* 0 */
-		/* 1 */
-		/***/function (module, exports, __webpack_require__) {
-
-			__webpack_require__(3);
-			module.exports = __webpack_require__(7);
-
-			if (module.exports.__esModule) module.exports = module.exports.default;(typeof module.exports === "function" ? module.exports.options : module.exports).template = __webpack_require__(6);
-			if (false) {
-				(function () {
-					var hotAPI = require("vue-hot-reload-api");
-					hotAPI.install(require("vue"));
-					if (!hotAPI.compatible) return;
-					var id = "-!babel!./../../../node_modules/.7.1.7@vue-loader/lib/selector.js?type=script&index=0!./Backtop.vue";
-					hotAPI.createRecord(id, module.exports);
-					module.hot.accept(["-!babel!./../../../node_modules/.7.1.7@vue-loader/lib/selector.js?type=script&index=0!./Backtop.vue", "-!vue-html-loader!./../../../node_modules/.7.1.7@vue-loader/lib/selector.js?type=template&index=0!./Backtop.vue"], function () {
-						var newOptions = require("-!babel!./../../../node_modules/.7.1.7@vue-loader/lib/selector.js?type=script&index=0!./Backtop.vue");
-						if (newOptions && newOptions.__esModule) newOptions = newOptions.default;
-						var newTemplate = require("-!vue-html-loader!./../../../node_modules/.7.1.7@vue-loader/lib/selector.js?type=template&index=0!./Backtop.vue");
-						hotAPI.update(id, newOptions, newTemplate);
-					});
-				})();
-			}
-
-			/***/
-		},
-		/* 2 */
-		/***/function (module, exports) {
-
-			/*
-   	MIT License http://www.opensource.org/licenses/mit-license.php
-   	Author Tobias Koppers @sokra
-   */
-			var stylesInDom = {},
-			    memoize = function memoize(fn) {
-				var memo;
-				return function () {
-					if (typeof memo === "undefined") memo = fn.apply(this, arguments);
-					return memo;
-				};
-			},
-			    isOldIE = memoize(function () {
-				return (/msie [6-9]\b/.test(window.navigator.userAgent.toLowerCase())
-				);
-			}),
-			    getHeadElement = memoize(function () {
-				return document.head || document.getElementsByTagName("head")[0];
-			}),
-			    singletonElement = null,
-			    singletonCounter = 0,
-			    styleElementsInsertedAtTop = [];
-
-			module.exports = function (list, options) {
-				if (typeof DEBUG !== "undefined" && DEBUG) {
-					if ((typeof document === 'undefined' ? 'undefined' : (0, _typeof3.default)(document)) !== "object") throw new Error("The style-loader cannot be used in a non-browser environment");
-				}
-
-				options = options || {};
-				// Force single-tag solution on IE6-9, which has a hard limit on the # of <style>
-				// tags it will allow on a page
-				if (typeof options.singleton === "undefined") options.singleton = isOldIE();
-
-				// By default, add <style> tags to the bottom of <head>.
-				if (typeof options.insertAt === "undefined") options.insertAt = "bottom";
-
-				var styles = listToStyles(list);
-				addStylesToDom(styles, options);
-
-				return function update(newList) {
-					var mayRemove = [];
-					for (var i = 0; i < styles.length; i++) {
-						var item = styles[i];
-						var domStyle = stylesInDom[item.id];
-						domStyle.refs--;
-						mayRemove.push(domStyle);
-					}
-					if (newList) {
-						var newStyles = listToStyles(newList);
-						addStylesToDom(newStyles, options);
-					}
-					for (var i = 0; i < mayRemove.length; i++) {
-						var domStyle = mayRemove[i];
-						if (domStyle.refs === 0) {
-							for (var j = 0; j < domStyle.parts.length; j++) {
-								domStyle.parts[j]();
-							}delete stylesInDom[domStyle.id];
-						}
-					}
-				};
-			};
-
-			function addStylesToDom(styles, options) {
-				for (var i = 0; i < styles.length; i++) {
-					var item = styles[i];
-					var domStyle = stylesInDom[item.id];
-					if (domStyle) {
-						domStyle.refs++;
-						for (var j = 0; j < domStyle.parts.length; j++) {
-							domStyle.parts[j](item.parts[j]);
-						}
-						for (; j < item.parts.length; j++) {
-							domStyle.parts.push(addStyle(item.parts[j], options));
-						}
-					} else {
-						var parts = [];
-						for (var j = 0; j < item.parts.length; j++) {
-							parts.push(addStyle(item.parts[j], options));
-						}
-						stylesInDom[item.id] = { id: item.id, refs: 1, parts: parts };
-					}
-				}
-			}
-
-			function listToStyles(list) {
-				var styles = [];
-				var newStyles = {};
-				for (var i = 0; i < list.length; i++) {
-					var item = list[i];
-					var id = item[0];
-					var css = item[1];
-					var media = item[2];
-					var sourceMap = item[3];
-					var part = { css: css, media: media, sourceMap: sourceMap };
-					if (!newStyles[id]) styles.push(newStyles[id] = { id: id, parts: [part] });else newStyles[id].parts.push(part);
-				}
-				return styles;
-			}
-
-			function insertStyleElement(options, styleElement) {
-				var head = getHeadElement();
-				var lastStyleElementInsertedAtTop = styleElementsInsertedAtTop[styleElementsInsertedAtTop.length - 1];
-				if (options.insertAt === "top") {
-					if (!lastStyleElementInsertedAtTop) {
-						head.insertBefore(styleElement, head.firstChild);
-					} else if (lastStyleElementInsertedAtTop.nextSibling) {
-						head.insertBefore(styleElement, lastStyleElementInsertedAtTop.nextSibling);
-					} else {
-						head.appendChild(styleElement);
-					}
-					styleElementsInsertedAtTop.push(styleElement);
-				} else if (options.insertAt === "bottom") {
-					head.appendChild(styleElement);
-				} else {
-					throw new Error("Invalid value for parameter 'insertAt'. Must be 'top' or 'bottom'.");
-				}
-			}
-
-			function removeStyleElement(styleElement) {
-				styleElement.parentNode.removeChild(styleElement);
-				var idx = styleElementsInsertedAtTop.indexOf(styleElement);
-				if (idx >= 0) {
-					styleElementsInsertedAtTop.splice(idx, 1);
-				}
-			}
-
-			function createStyleElement(options) {
-				var styleElement = document.createElement("style");
-				styleElement.type = "text/css";
-				insertStyleElement(options, styleElement);
-				return styleElement;
-			}
-
-			function createLinkElement(options) {
-				var linkElement = document.createElement("link");
-				linkElement.rel = "stylesheet";
-				insertStyleElement(options, linkElement);
-				return linkElement;
-			}
-
-			function addStyle(obj, options) {
-				var styleElement, update, remove;
-
-				if (options.singleton) {
-					var styleIndex = singletonCounter++;
-					styleElement = singletonElement || (singletonElement = createStyleElement(options));
-					update = applyToSingletonTag.bind(null, styleElement, styleIndex, false);
-					remove = applyToSingletonTag.bind(null, styleElement, styleIndex, true);
-				} else if (obj.sourceMap && typeof URL === "function" && typeof URL.createObjectURL === "function" && typeof URL.revokeObjectURL === "function" && typeof Blob === "function" && typeof btoa === "function") {
-					styleElement = createLinkElement(options);
-					update = updateLink.bind(null, styleElement);
-					remove = function remove() {
-						removeStyleElement(styleElement);
-						if (styleElement.href) URL.revokeObjectURL(styleElement.href);
-					};
-				} else {
-					styleElement = createStyleElement(options);
-					update = applyToTag.bind(null, styleElement);
-					remove = function remove() {
-						removeStyleElement(styleElement);
-					};
-				}
-
-				update(obj);
-
-				return function updateStyle(newObj) {
-					if (newObj) {
-						if (newObj.css === obj.css && newObj.media === obj.media && newObj.sourceMap === obj.sourceMap) return;
-						update(obj = newObj);
-					} else {
-						remove();
-					}
-				};
-			}
-
-			var replaceText = function () {
-				var textStore = [];
-
-				return function (index, replacement) {
-					textStore[index] = replacement;
-					return textStore.filter(Boolean).join('\n');
-				};
-			}();
-
-			function applyToSingletonTag(styleElement, index, remove, obj) {
-				var css = remove ? "" : obj.css;
-
-				if (styleElement.styleSheet) {
-					styleElement.styleSheet.cssText = replaceText(index, css);
-				} else {
-					var cssNode = document.createTextNode(css);
-					var childNodes = styleElement.childNodes;
-					if (childNodes[index]) styleElement.removeChild(childNodes[index]);
-					if (childNodes.length) {
-						styleElement.insertBefore(cssNode, childNodes[index]);
-					} else {
-						styleElement.appendChild(cssNode);
-					}
-				}
-			}
-
-			function applyToTag(styleElement, obj) {
-				var css = obj.css;
-				var media = obj.media;
-
-				if (media) {
-					styleElement.setAttribute("media", media);
-				}
-
-				if (styleElement.styleSheet) {
-					styleElement.styleSheet.cssText = css;
-				} else {
-					while (styleElement.firstChild) {
-						styleElement.removeChild(styleElement.firstChild);
-					}
-					styleElement.appendChild(document.createTextNode(css));
-				}
-			}
-
-			function updateLink(linkElement, obj) {
-				var css = obj.css;
-				var sourceMap = obj.sourceMap;
-
-				if (sourceMap) {
-					// http://stackoverflow.com/a/26603875
-					css += "\n/*# sourceMappingURL=data:application/json;base64," + btoa(unescape(encodeURIComponent((0, _stringify2.default)(sourceMap)))) + " */";
-				}
-
-				var blob = new Blob([css], { type: "text/css" });
-
-				var oldSrc = linkElement.href;
-
-				linkElement.href = URL.createObjectURL(blob);
-
-				if (oldSrc) URL.revokeObjectURL(oldSrc);
-			}
-
-			/***/
-		},
-		/* 3 */
-		/***/function (module, exports, __webpack_require__) {
-
-			// style-loader: Adds some css to the DOM by adding a <style> tag
-
-			// load the styles
-			var content = __webpack_require__(4);
-			if (typeof content === 'string') content = [[module.i, content, '']];
-			// add the styles to the DOM
-			var update = __webpack_require__(2)(content, {});
-			if (content.locals) module.exports = content.locals;
-			// Hot Module Replacement
-			if (false) {
-				// When the styles change, update the <style> tags
-				if (!content.locals) {
-					module.hot.accept("!!./../../../node_modules/.0.21.0@css-loader/index.js!./../../../node_modules/.7.1.7@vue-loader/lib/style-rewriter.js?id=_v-0a54d84b&file=Backtop.vue!./../../../node_modules/.2.2.3@less-loader/index.js!./../../../node_modules/.7.1.7@vue-loader/lib/selector.js?type=style&index=0!./Backtop.vue", function () {
-						var newContent = require("!!./../../../node_modules/.0.21.0@css-loader/index.js!./../../../node_modules/.7.1.7@vue-loader/lib/style-rewriter.js?id=_v-0a54d84b&file=Backtop.vue!./../../../node_modules/.2.2.3@less-loader/index.js!./../../../node_modules/.7.1.7@vue-loader/lib/selector.js?type=style&index=0!./Backtop.vue");
-						if (typeof newContent === 'string') newContent = [[module.id, newContent, '']];
-						update(newContent);
-					});
-				}
-				// When the module is disposed, remove the <style> tags
-				module.hot.dispose(function () {
-					update();
-				});
-			}
-
-			/***/
-		},
-		/* 4 */
-		/***/function (module, exports, __webpack_require__) {
-
-			exports = module.exports = __webpack_require__(5)();
-			// imports
-
-
-			// module
-			exports.push([module.i, ".icon-top {\n  position: fixed;\n  z-index: 9999;\n  background-color: #676262;\n  border-radius: 50%;\n  opacity: .7;\n}\n.icon-top:hover {\n  opacity: .95;\n}\n.icon-top:hover i {\n  top: 17px;\n}\n.icon-top > i {\n  display: inline-block;\n  color: #fff;\n  margin: 0;\n  position: absolute;\n  top: 45%;\n  left: 50%;\n  -webkit-transform: translate(-50%, -50%);\n  transform: translate(-50%, -50%);\n  -webkit-transition: all 0.3s ease;\n  transition: all 0.3s ease;\n  background-image: url('data:image/png;base64,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');\n  background-position: center center;\n  background-size: 100%;\n  background-repeat: no-repeat;\n}\n", ""]);
-
-			// exports
-
-
-			/***/
-		},
-		/* 5 */
-		/***/function (module, exports) {
-
-			/*
-   	MIT License http://www.opensource.org/licenses/mit-license.php
-   	Author Tobias Koppers @sokra
-   */
-			// css base code, injected by the css-loader
-			module.exports = function () {
-				var list = [];
-
-				// return the list of modules as css string
-				list.toString = function toString() {
-					var result = [];
-					for (var i = 0; i < this.length; i++) {
-						var item = this[i];
-						if (item[2]) {
-							result.push("@media " + item[2] + "{" + item[1] + "}");
-						} else {
-							result.push(item[1]);
-						}
-					}
-					return result.join("");
-				};
-
-				// import a list of modules into the list
-				list.i = function (modules, mediaQuery) {
-					if (typeof modules === "string") modules = [[null, modules, ""]];
-					var alreadyImportedModules = {};
-					for (var i = 0; i < this.length; i++) {
-						var id = this[i][0];
-						if (typeof id === "number") alreadyImportedModules[id] = true;
-					}
-					for (i = 0; i < modules.length; i++) {
-						var item = modules[i];
-						// skip already imported module
-						// this implementation is not 100% perfect for weird media query combinations
-						//  when a module is imported multiple times with different media queries.
-						//  I hope this will never occur (Hey this way we have smaller bundles)
-						if (typeof item[0] !== "number" || !alreadyImportedModules[item[0]]) {
-							if (mediaQuery && !item[2]) {
-								item[2] = mediaQuery;
-							} else if (mediaQuery) {
-								item[2] = "(" + item[2] + ") and (" + mediaQuery + ")";
-							}
-							list.push(item);
-						}
-					}
-				};
-				return list;
-			};
-
-			/***/
-		},
-		/* 6 */
-		/***/function (module, exports) {
-
-			module.exports = "<div class=\"vc-backtop-component\">\n        <a href=\"javascript:\" v-el:btn class=\"iconfont icon-top\" :style=\"style\" @click=\"backTop\" v-show=\"show\">\n            <i :style=\"{width: iconWidth, height: iconHeight}\"></i>\n        </a>\n    </div>";
-
-			/***/
-		},
-		/* 7 */
-		/***/function (module, exports) {
-
-			"use strict";
-			'use strict';
-
-			Object.defineProperty(exports, "__esModule", {
-				value: true
-			});
-			// <template>
-			//     <div class="vc-backtop-component">
-			//         <a href="javascript:" v-el:btn class="iconfont icon-top" :style="style" @click="backTop" v-show="show">
-			//             <i :style="{width: iconWidth, height: iconHeight}"></i>
-			//         </a>
-			//     </div>
-			// </template>
-
-			// <style>
-			//     .icon-top {
-			//         position: fixed;
-			//         z-index: 9999;
-			//         background-color: #676262;
-			//         border-radius: 50%;
-			//         opacity: .7;
-			//     }
-			//     .icon-top:hover {
-			//         opacity: .95;
-			//     }
-			//     .icon-top:hover i {
-			//         top: 17px;
-			//     }
-			//     .icon-top > i {
-			//         display: inline-block;
-			//         color: #fff;
-			//         margin: 0;
-			//         position: absolute;
-			//         top: 45%;
-			//         left: 50%;
-			//         -webkit-transform: translate(-50%, -50%);
-			//         -moz-transform: translate(-50%, -50%);
-			//         transform: translate(-50%, -50%);
-			//         -webkit-transition: all 0.3s ease;
-			//         -moz-transition: all 0.3s ease;
-			//         transition: all 0.3s ease;
-			//         background-image: url('data:image/png;base64,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');
-			//         background-position: center center;
-			//         background-size: 100%;
-			//         background-repeat: no-repeat;
-			//     }
-			// </style>
-
-			// <script>
-			/**
-    * 工具方法
-    */
-			/*
-   * 频率控制 返回函数连续调用时，fn 执行频率限定为每多少时间执行一次
-   * @param fn {function}  需要调用的函数
-   * @param delay  {number}    延迟时间，单位毫秒
-   * @param immediate  {bool} 给 immediate参数传递false 绑定的函数先执行，而不是delay后后执行。
-   * @return {function}实际调用函数
-   */
-			var throttle = function throttle(fn, delay, immediate, debounce) {
-				var curr = +new Date(),
-
-				//当前事件
-				last_call = 0,
-				    last_exec = 0,
-				    timer = null,
-				    diff,
-
-				//时间差
-				context,
-
-				//上下文
-				args,
-				    exec = function exec() {
-					last_exec = curr;
-					fn.apply(context, args);
-				};
-				return function () {
-					curr = +new Date();
-					context = this, args = arguments, diff = curr - (debounce ? last_call : last_exec) - delay;
-					clearTimeout(timer);
-					if (debounce) {
-						if (immediate) {
-							timer = setTimeout(exec, delay);
-						} else if (diff >= 0) {
-							exec();
-						}
-					} else {
-						if (diff >= 0) {
-							exec();
-						} else if (immediate) {
-							timer = setTimeout(exec, -diff);
-						}
-					}
-					last_call = curr;
-				};
-			};
-
-			/*
-   * 空闲控制 返回函数连续调用时，空闲时间必须大于或等于 delay，fn 才会执行
-   * @param fn {function}  要调用的函数
-   * @param delay   {number}    空闲时间
-   * @param immediate  {bool} 给 immediate参数传递false 绑定的函数先执行，而不是delay后后执行。
-   * @return {function}实际调用函数
-   */
-
-			var debounce = function debounce(fn, delay, immediate) {
-				return throttle(fn, delay, immediate, true);
-			};
-			function getScrollTop() {
-				//取得滚动条的竖直距离  
-				return document.documentElement.scrollTop || document.body.scrollTop;
-			}
-
-			function setScrollTop(value) {
-				//设置滚动条的竖直距离,实现效果的关键就是在很短的间隔时间内不断地修改滚动条的竖直距离,以实现滚动效果  
-				document.documentElement.scrollTop = value;
-				document.body.scrollTop = value;
-			}
-
-			var DEFAULT_SIZE = 50;
-
-			exports.default = {
-				props: {
-					style: {
-						type: Object,
-						default: function _default() {
-							return {
-								width: DEFAULT_SIZE + 'px',
-								height: DEFAULT_SIZE + 'px',
-								top: 'auto',
-								left: 'auto',
-								right: '30px',
-								bottom: '40px'
-							};
-						}
-					},
-					interval: {
-						type: [Number, String],
-						default: 128
-					},
-					scrollbarOffset: {
-						type: [Number, String],
-						default: 100
-					},
-					acceleration: {
-						type: [Number, String],
-						default: .5
-					},
-					time: {
-						type: [Number, String],
-						default: 10
-					},
-					mode: { // 动画模式
-						type: String,
-						default: 'raf'
-					}
-				},
-				data: function data() {
-					return {
-						btn: null,
-						show: false
-					};
-				},
-				ready: function ready() {
-					var _this = this;
-
-					this.btn = this.$els.btn;
-					setTimeout(function () {
-						_this.bindEvent();
-					});
-				},
-
-				methods: {
-					bindEvent: function bindEvent() {
-						var btn = this.btn;
-						window.addEventListener('scroll', this.scrollHandler, false);
-					},
-					scrollSpy: function scrollSpy() {
-						var scrollTop = getScrollTop();
-						if (scrollTop > this.scrollbarOffset) {
-							// 判断滚动条距离窗口顶部多远时显示出来，这里是100px
-							this.show = true;
-						} else {
-							this.show = false;
-						}
-					},
-					backTop: function backTop(acceleration, time) {
-						//修改参数可调整返回顶部的速度  
-						var speed = 1 + this.acceleration;
-						if (this.mode !== 'raf') {
-							var timer = setInterval(function () {
-								setScrollTop(Math.floor(getScrollTop() / speed)); //这行代码是关键，取得滚动条竖直距离，除以speed后再给滚动条设置竖直距离  
-								if (getScrollTop() == 0) clearInterval(timer);
-							}, this.time);
-						} else {
-							requestAnimationFrame(function step() {
-								setScrollTop(Math.floor(getScrollTop() / speed));
-
-								if (getScrollTop() > 0) {
-									requestAnimationFrame(step);
-								}
-							});
-						}
-					}
-				},
-				computed: {
-					scrollHandler: function scrollHandler() {
-						return throttle(this.scrollSpy, +this.interval);
-					},
-					iconWidth: function iconWidth() {
-						return parseFloat(this.style.width) / 2 + 'px';
-					},
-					iconHeight: function iconHeight() {
-						return parseFloat(this.style.height) / 2 + 'px';
-					}
-				},
-				beforeDestory: function beforeDestory() {
-					window.removeEventListener('scroll', this.scrollHandler, false);
-				}
-			};
-			// </script>
-
-			/***/
-		},
-		/* 8 */
-		/***/function (module, exports, __webpack_require__) {
-
-			"use strict";
-			'use strict';
-
-			var _Backtop = __webpack_require__(1);
-
-			var _Backtop2 = _interopRequireDefault(_Backtop);
-
-			function _interopRequireDefault(obj) {
-				return obj && obj.__esModule ? obj : { default: obj };
-			}
-
-			module.exports = _Backtop2.default;
-
-			/***/
-		}
-		/******/])
-	);
+Object.defineProperty(exports, "__esModule", {
+  value: true
 });
-;
-//# sourceMappingURL=build.js.map
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(40)(module)))
+
+var _Backtop = __webpack_require__(11);
+
+var _Backtop2 = _interopRequireDefault(_Backtop);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+exports.default = _Backtop2.default;
 
 /***/ },
-/* 38 */
+/* 3 */
 /***/ function(module, exports) {
 
 // shim for using process in browser
@@ -11595,7 +10342,361 @@ process.umask = function() { return 0; };
 
 
 /***/ },
-/* 39 */
+/* 4 */
+/***/ function(module, exports) {
+
+/*
+	MIT License http://www.opensource.org/licenses/mit-license.php
+	Author Tobias Koppers @sokra
+*/
+var stylesInDom = {},
+	memoize = function(fn) {
+		var memo;
+		return function () {
+			if (typeof memo === "undefined") memo = fn.apply(this, arguments);
+			return memo;
+		};
+	},
+	isOldIE = memoize(function() {
+		return /msie [6-9]\b/.test(window.navigator.userAgent.toLowerCase());
+	}),
+	getHeadElement = memoize(function () {
+		return document.head || document.getElementsByTagName("head")[0];
+	}),
+	singletonElement = null,
+	singletonCounter = 0,
+	styleElementsInsertedAtTop = [];
+
+module.exports = function(list, options) {
+	if(typeof DEBUG !== "undefined" && DEBUG) {
+		if(typeof document !== "object") throw new Error("The style-loader cannot be used in a non-browser environment");
+	}
+
+	options = options || {};
+	// Force single-tag solution on IE6-9, which has a hard limit on the # of <style>
+	// tags it will allow on a page
+	if (typeof options.singleton === "undefined") options.singleton = isOldIE();
+
+	// By default, add <style> tags to the bottom of <head>.
+	if (typeof options.insertAt === "undefined") options.insertAt = "bottom";
+
+	var styles = listToStyles(list);
+	addStylesToDom(styles, options);
+
+	return function update(newList) {
+		var mayRemove = [];
+		for(var i = 0; i < styles.length; i++) {
+			var item = styles[i];
+			var domStyle = stylesInDom[item.id];
+			domStyle.refs--;
+			mayRemove.push(domStyle);
+		}
+		if(newList) {
+			var newStyles = listToStyles(newList);
+			addStylesToDom(newStyles, options);
+		}
+		for(var i = 0; i < mayRemove.length; i++) {
+			var domStyle = mayRemove[i];
+			if(domStyle.refs === 0) {
+				for(var j = 0; j < domStyle.parts.length; j++)
+					domStyle.parts[j]();
+				delete stylesInDom[domStyle.id];
+			}
+		}
+	};
+}
+
+function addStylesToDom(styles, options) {
+	for(var i = 0; i < styles.length; i++) {
+		var item = styles[i];
+		var domStyle = stylesInDom[item.id];
+		if(domStyle) {
+			domStyle.refs++;
+			for(var j = 0; j < domStyle.parts.length; j++) {
+				domStyle.parts[j](item.parts[j]);
+			}
+			for(; j < item.parts.length; j++) {
+				domStyle.parts.push(addStyle(item.parts[j], options));
+			}
+		} else {
+			var parts = [];
+			for(var j = 0; j < item.parts.length; j++) {
+				parts.push(addStyle(item.parts[j], options));
+			}
+			stylesInDom[item.id] = {id: item.id, refs: 1, parts: parts};
+		}
+	}
+}
+
+function listToStyles(list) {
+	var styles = [];
+	var newStyles = {};
+	for(var i = 0; i < list.length; i++) {
+		var item = list[i];
+		var id = item[0];
+		var css = item[1];
+		var media = item[2];
+		var sourceMap = item[3];
+		var part = {css: css, media: media, sourceMap: sourceMap};
+		if(!newStyles[id])
+			styles.push(newStyles[id] = {id: id, parts: [part]});
+		else
+			newStyles[id].parts.push(part);
+	}
+	return styles;
+}
+
+function insertStyleElement(options, styleElement) {
+	var head = getHeadElement();
+	var lastStyleElementInsertedAtTop = styleElementsInsertedAtTop[styleElementsInsertedAtTop.length - 1];
+	if (options.insertAt === "top") {
+		if(!lastStyleElementInsertedAtTop) {
+			head.insertBefore(styleElement, head.firstChild);
+		} else if(lastStyleElementInsertedAtTop.nextSibling) {
+			head.insertBefore(styleElement, lastStyleElementInsertedAtTop.nextSibling);
+		} else {
+			head.appendChild(styleElement);
+		}
+		styleElementsInsertedAtTop.push(styleElement);
+	} else if (options.insertAt === "bottom") {
+		head.appendChild(styleElement);
+	} else {
+		throw new Error("Invalid value for parameter 'insertAt'. Must be 'top' or 'bottom'.");
+	}
+}
+
+function removeStyleElement(styleElement) {
+	styleElement.parentNode.removeChild(styleElement);
+	var idx = styleElementsInsertedAtTop.indexOf(styleElement);
+	if(idx >= 0) {
+		styleElementsInsertedAtTop.splice(idx, 1);
+	}
+}
+
+function createStyleElement(options) {
+	var styleElement = document.createElement("style");
+	styleElement.type = "text/css";
+	insertStyleElement(options, styleElement);
+	return styleElement;
+}
+
+function createLinkElement(options) {
+	var linkElement = document.createElement("link");
+	linkElement.rel = "stylesheet";
+	insertStyleElement(options, linkElement);
+	return linkElement;
+}
+
+function addStyle(obj, options) {
+	var styleElement, update, remove;
+
+	if (options.singleton) {
+		var styleIndex = singletonCounter++;
+		styleElement = singletonElement || (singletonElement = createStyleElement(options));
+		update = applyToSingletonTag.bind(null, styleElement, styleIndex, false);
+		remove = applyToSingletonTag.bind(null, styleElement, styleIndex, true);
+	} else if(obj.sourceMap &&
+		typeof URL === "function" &&
+		typeof URL.createObjectURL === "function" &&
+		typeof URL.revokeObjectURL === "function" &&
+		typeof Blob === "function" &&
+		typeof btoa === "function") {
+		styleElement = createLinkElement(options);
+		update = updateLink.bind(null, styleElement);
+		remove = function() {
+			removeStyleElement(styleElement);
+			if(styleElement.href)
+				URL.revokeObjectURL(styleElement.href);
+		};
+	} else {
+		styleElement = createStyleElement(options);
+		update = applyToTag.bind(null, styleElement);
+		remove = function() {
+			removeStyleElement(styleElement);
+		};
+	}
+
+	update(obj);
+
+	return function updateStyle(newObj) {
+		if(newObj) {
+			if(newObj.css === obj.css && newObj.media === obj.media && newObj.sourceMap === obj.sourceMap)
+				return;
+			update(obj = newObj);
+		} else {
+			remove();
+		}
+	};
+}
+
+var replaceText = (function () {
+	var textStore = [];
+
+	return function (index, replacement) {
+		textStore[index] = replacement;
+		return textStore.filter(Boolean).join('\n');
+	};
+})();
+
+function applyToSingletonTag(styleElement, index, remove, obj) {
+	var css = remove ? "" : obj.css;
+
+	if (styleElement.styleSheet) {
+		styleElement.styleSheet.cssText = replaceText(index, css);
+	} else {
+		var cssNode = document.createTextNode(css);
+		var childNodes = styleElement.childNodes;
+		if (childNodes[index]) styleElement.removeChild(childNodes[index]);
+		if (childNodes.length) {
+			styleElement.insertBefore(cssNode, childNodes[index]);
+		} else {
+			styleElement.appendChild(cssNode);
+		}
+	}
+}
+
+function applyToTag(styleElement, obj) {
+	var css = obj.css;
+	var media = obj.media;
+
+	if(media) {
+		styleElement.setAttribute("media", media)
+	}
+
+	if(styleElement.styleSheet) {
+		styleElement.styleSheet.cssText = css;
+	} else {
+		while(styleElement.firstChild) {
+			styleElement.removeChild(styleElement.firstChild);
+		}
+		styleElement.appendChild(document.createTextNode(css));
+	}
+}
+
+function updateLink(linkElement, obj) {
+	var css = obj.css;
+	var sourceMap = obj.sourceMap;
+
+	if(sourceMap) {
+		// http://stackoverflow.com/a/26603875
+		css += "\n/*# sourceMappingURL=data:application/json;base64," + btoa(unescape(encodeURIComponent(JSON.stringify(sourceMap)))) + " */";
+	}
+
+	var blob = new Blob([css], { type: "text/css" });
+
+	var oldSrc = linkElement.href;
+
+	linkElement.href = URL.createObjectURL(blob);
+
+	if(oldSrc)
+		URL.revokeObjectURL(oldSrc);
+}
+
+
+/***/ },
+/* 5 */
+/***/ function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__(6);
+if(typeof content === 'string') content = [[module.i, content, '']];
+// add the styles to the DOM
+var update = __webpack_require__(4)(content, {});
+if(content.locals) module.exports = content.locals;
+// Hot Module Replacement
+if(false) {
+	// When the styles change, update the <style> tags
+	if(!content.locals) {
+		module.hot.accept("!!./../../node_modules/.0.21.0@css-loader/index.js!./../../node_modules/.7.1.7@vue-loader/lib/style-rewriter.js?id=_v-d39013f0&file=Backtop.vue!./../../node_modules/.2.2.3@less-loader/index.js!./../../node_modules/.7.1.7@vue-loader/lib/selector.js?type=style&index=0!./Backtop.vue", function() {
+			var newContent = require("!!./../../node_modules/.0.21.0@css-loader/index.js!./../../node_modules/.7.1.7@vue-loader/lib/style-rewriter.js?id=_v-d39013f0&file=Backtop.vue!./../../node_modules/.2.2.3@less-loader/index.js!./../../node_modules/.7.1.7@vue-loader/lib/selector.js?type=style&index=0!./Backtop.vue");
+			if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+			update(newContent);
+		});
+	}
+	// When the module is disposed, remove the <style> tags
+	module.hot.dispose(function() { update(); });
+}
+
+/***/ },
+/* 6 */
+/***/ function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(7)();
+// imports
+
+
+// module
+exports.push([module.i, ".icon-top {\n  position: fixed;\n  z-index: 9999;\n  background-color: #676262;\n  border-radius: 50%;\n  opacity: .7;\n}\n.icon-top:hover {\n  opacity: .95;\n}\n.icon-top:hover i {\n  top: 17px;\n}\n.icon-top > i {\n  display: inline-block;\n  color: #fff;\n  margin: 0;\n  position: absolute;\n  top: 45%;\n  left: 50%;\n  -webkit-transform: translate(-50%, -50%);\n  transform: translate(-50%, -50%);\n  -webkit-transition: all 0.3s ease;\n  transition: all 0.3s ease;\n  background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAVoAAADICAYAAACpiCmKAAARaUlEQVR4Xu2dX1YkRRaHIwpepdIDx1fbFdiuQHoFtisQVyCzApkd6ApsVyCuQGYFQ69AfPXAMQsfp7tiTvFHAYGKX1ZEZtyIb177RuTN73fzMyeoAu/4HwQKJdD3ffe/sPXpzIUXbhZePNbmcjk7Cf794qOuOy30NmgLAs7DAAIlETj/488v3Gz52jm/78Ljcn20X+9778KJW/qTLb/8ueu6s5Lui17aJoBo286/iLvv+/7FO++/dc6/diF0KZry3h27pT/e/XDnxxT7sQcENiGAaDehx9qNCPwl2OAONtroucXen/mlO0K42QizcQQBRBsBiZK0BFZnr++9/yYEd5R256d3896fvA/Lf3GWOxZxrnOXAKJlHkYl8Hvfv5z52U/S+WvCDn3wh7sf7nyfcEu2gsBaAoh2LSIKUhG46C8Pggs/pNpv6D6rt9utsPyy67p+6B6sg4BCANEqtKgdTOBisfh2zKOCdY1670+3wvIVsl1Hin9PQQDRpqDIHs8SOF8sfnA5f+A1kD+yHQiOZTIBRCsjY4FCoFTJ3t4DslXSpHYoAUQ7lBzr1hIoXbLIdm2EFCQigGgTgWSb+wSsSBbZMrljEEC0Y1Bu7BrWJItsGxvQCW4X0U4AveZLWpUssq15Kqe/N0Q7fQbVdGBdssi2mlEs7kYQbXGR2GyoFskiW5vzV3rXiLb0hAz0V5tkka2BoTPWIqI1Flhp7dYqWWRb2qTZ7gfR2s5v0u5rlyyynXS8qro4oq0qzvFuphXJItvxZqrmKyHamtPNdG+tSRbZZhqkhrZFtA2FneJWW5Ussk0xPe3ugWjbzV6+89Yli2zlkWHBDQFEyyhEEUCy9zHxW7+ixoYiRMsMxBJAso+TQraxE0Qdb7TMwLMEkOzzA4JseYBiCCDaGEqN1iDZuOCRbRynlqsQbcvpP3PvSFYbDGSr8WqtGtG2lnjE/SLZCEiPlCDbYdxaWIVoW0hZuEckK8BCtpvBamg1om0o7HW3imTXEYr7d95s4zi1VIVoW0qbM9nR0ka2o6E2cSFEayKmvE3yJpuHL7LNw9XirojWYmoJe0ayCWFyZpsXpuHdEa3h8DZtHcluSjBuPW+2cZxqrkK0NafLmWwx6SLbYqKYpBFEOwn2aS/Km+w0/JHtNNxLuCqiLSGFEXtAsiPC5sx2WtgFXR3RFhRG7laQbG7CcfvzZhvHqaYqRFtTmpzJmkkT2ZqJKkmjiDYJxrI34U22zHyQbZm55OgK0eagWtCeSLagMDizLTuMjN0h2oxwp94ayU6dQNz1ebON42S5CtFaTo8z2WrSQ7bVRPnojSDaCvPlTdZmqMjWZm4xXSPaGEqGapCsobA4s7UdltA9ohVglV6KZEtPKK4/3mzjOFmqQrSW0uJMtpK01t8Gsl3PyFIForWU1hO98iZbQYgcI9QZ4s1dIVrj8SJZ4wGuaZ832zryRbSGc0SyhsMTWke2AqxCSxFtocGsawvJriNU178jW9t5IlqD+SFZg6ElaBnZJoA40RaIdiLwQy+LZIeSq2MdsrWZI6I1lBuSNRRWxlaRbUa4mbZGtJnApt4WyaYmans/ZGsrP0RrIC8kayCkCVpEthNAH3hJRDsQ3FjLkOxYpG1eB9nayA3RFpwTki04nIJaQ7YFhfFEK4i20IyQbKHBFNoWsi00mJu2EG2B+SDZAkMx0BKyLTckRFtYNki2sECMtYNsywwM0RaUC5ItKAzDrSDb8sJDtIVkgmQLCaKSNpBtWUEi2gLyQLIFhFBhC8i2nFAR7cRZIFkxAO9/cyF8LK5qthzZlhE9op0wByQrwvf+7XZY7r93s9fBhR/E1c2WI9vpo0e0E2WAZEXwN5Ltuq5frbzoLw+QbTxDZBvPKkclos1Bdc2eSFaE/kCyt6uRrcYR2Wq8UlYj2pQ0I/ZCshGQ7pY8IVlkK3K8KUe2w7htugrRbkpQWI9kBVir0jWSRbYiT2Q7DFiCVYg2AcSYLZBsDKU7NZGSRbYiV2Q7DNiGqxDthgBjliPZGErDJYtsRb7IdhiwDVYh2g3gxSxFsjGUNpcsshU5I9thwAauQrQDwcUsQ7IxlNJJFtmKvJHtMGADViHaAdBiliDZGErpJYtsRe7IdhgwcRWiFYHFlCPZGEr5JItsRf7IdhgwYRWiFWDFlCLZGEr5JYtsxRyQ7TBgkasQbSSomDIkG0NpPMkiWzEPZDsMWMQqRBsBKaYEycZQGl+yyFbMBdkOA7ZmFaJNgBXJihDFLyOIuz9Zzu9G0EjydV2N13PViHZDlkhWBDiRZHmzFXPizXYYsCdWIdoNcCJZEd7EkkW2Yl7IdhiwR1Yh2oEokawIrhDJIlsxN2Q7DNiDVYh2AEYkK0IrTLLIVswP2Q4DdmcVohURIlkRWKGSRbZijsh2GLBbbhutbmwxkhUDL1yyyFbME9kOA7b61cqDVza2EMmKgRuRLLIVc0W2g4Ah2ghsSDYC0t0SY5JFtmK+yFYGhmjXIEOy4kwZlSyyFXNGthIwRPsMLiQrzVL03/gSdx29nG+Qacj5Btl6Xoj2CUZIdv3w3Ksw/ib78G6RrZY/sn2eF6J9hA+S1R6y2L9WK+46eTmy1SJAtk/zQrQP2CBZ7eGqVbKc2YpzwJnts8AQ7R08SFZ8uCo7Lnjq7nmz1eaCN9t/8kK0N0yQrPYw1f4my5mtOA8PypHtfSCI1jmHZMWHqpE3WWQrzgWyfRJY86JFsuLD1KhkObMV54Qz23vAmhYtkhUfnsYli2zFeUG2fwFrVrRIVnxokOw9YPyATJuf1s9smxQtktUektZ+8BVLB9nGkrqua1m2zYkWyWoPB5J9nhey1eapVdk2JVokqz0USDaOF7KN43Rb1aJsmxEtktUeBiSr8UK2Gq/WZNuEaJGs9hAgWZHXTTmy1bi1JNvqRYtkteFHsiKvB+XIVuPXimyrFi2S1YYeyYq8nihHthrHFmRbrWiRrDbsSFbktaYc2Wo8a5dtlaJFstqQI1mRV2Q5so0EdVNWs2yrEy2S1YYbyYq8xHJkqwGrVbZViRbJakONZEVeA8uRrQbuRrZfdl13pq0st7oa0SJZccj43QUisM3Kka3Iz/t+GZavPuq6U3FlkeVViBbJirOFZEVgacqRrcixItmaFy2SlYf37XZY7ndd14srKU9AANmKECuRrWnRIll5aJGsiCxHObIVqVYgW7OiRbLysCJZEVnOcmQr0jUuW5OiRbLykCJZEdkY5chWpGxYtuZEi2Tl4USyIrIxy5GtSNuobE2JFsnKQ4lkRWRTlCNbkbpB2ZoRLZKVhxHJisimLEe2In1jsjUhWiQrDyGSFZGVUI5sxRQMybZ40SJZefiQrIispHJkK6ZhRLZFixbJykOHZEVkJZYjWzEVA7ItVrRIVh42JCsiK7kc2YrpFC7bIkWLZOUhQ7IiMgvlyFZMqWDZFidaJCsPF5IVkVkqR7ZiWoXKtijRIll5qJCsiMxiObIVUytQtsWIFsnKw4RkRWSWy5GtmF5hsi1CtEhWHiIkKyKroRzZiikWJNvJRYtk5eFBsiKymsqRrZhmIbKdVLRIVh4aJCsiq7Ec2YqpFiDbyUSLZOVhQbIisprLka2Y7sSynUS0SFYeEiQrImuhHNmKKU8o29FFi2Tl4UCyIrKWypGtmPZEsh1VtEhWHgokKyJrsRzZiqlPINvRRItk5WFAsiKylsuRrZi+9/12WH7Wdd2ZuHJQ+SiiRbJiNt4jWREZ5c4hW20KvPenW2H5quu6XlupV2cXLeGLoSBZERjldwnwvGnzMJZss4r2vO/3nfO/aLfecDWSbTj8dLeObEWW3r3Zm8+/FldJ5dlE2/d9987PfnUhdFJHrRYj2VaTz3LfyFbFOvtyr/vgWF0VW59NtOeLxRsX3FexjTRdh2Sbjj/XzSNbgez1D8c+yXVem0W0HBlIAfODLwEXpRoBZCvw8u77vfn8UFgRXZpFtBeLy19CCPvRXbRayJtsq8mPet/INh73tgurt9rkH/lKLlreZiNDRbKRoChLQQDZRlL07se9+fwgsjq6LLloLxaL4xDcF9EdtFiIZFtMffJ7RrZxEeR4q00q2qtPGjj/R9ztNFqFZBsNvozbRrbrc/DO/2u32/lufWV8RVLREuIa8Eg2fjKpzEaA5/R5tKsvMezOdz5LGUBa0S4WJyG4z1M2WM1eSLaaKGu4EWT7fIrbLnyY8qNeSUV7vrj8gy8oPBIgkq3BTdXdA7J9LtK0X2BIJtrf+/7lzPn/VjeNm94Qkt2UIOszEkC2T8BN/JnaZKIlMN5kM/qArTMS4Nn9J1zv3X925/Nk3wVIJtrz/vLIufBtxnmwtTVvsrbyarxbZPtgALw/25vvfJJqLNKJlt9t8HcmSDbVfLLPiASQ7X3Ye908mR+TbXTBJw6uU0KyI6qBS6UmgGz/JopoU09Xqv2QbCqS7DMhAWR7DR/RTjiET14ayZaYCj0NJIBsEe3A0cm4DMlmhMvWUxFoXbZFvtGeLxbfueC+mWooJrsukp0MPRfOT6Bl2ZYp2hY/3oVk8z/pXGFyAk3K1vu3e/Odl6ngJ/vUQXO/hxbJpppB9jFAoDXZeu9+3p3PX6eKJplo+75/8c75X1M1VvQ+SLboeGguD4G2ZOv/vdftHKUimUy0q4bOF5dnLoSPUzVX5D5ItshYaGocAu3INrza67qTVFQTi7byv3yLZFPNHfsYJlC9bL1f7M13upQRpRVt/+dr55Y/pWywmL2QbDFR0Mj0BKqWbYa/G5ZUtNUeHyDZ6Z9sOiiOQL2yTfu7aFfBpRdtbR/zQrLFPeA0VA6B6mTr/W97850XqQknF+3VH2j0s9UPxeapmx19PyQ7OnIuaI9ATbL1zn+92+28SZ1CctFeHx9U8C0xJJt61tivYgJVyDbT22yWo4PVpubfapFsxUrg1nIRsC/b9Gezt6yzvNFevdVa/QQCks31HLJvAwSsyjb1n655GHU20a4udLFYHIfgvjAzX0jWTFQ0Wi4Bc7L1frEdli+7rjvLRTWraG+OEE5NfFsMyeaaMfZtkIAt2eY7Msh+dHB7gas/Q+5nJ0V/CgHJNqgCbjk3AQuyzfUpg1GPDkzIFsnmft7Yv2ECRcs2wzfAnoo669HB3YuW+Ga7+lVoWyEcdF3XN/wscOsQyEqgSNl69/3efH6Y9cbvbD6aaFfXvJHtcRFntiP+12ysMLkOBEolcPUpJB/elHCEONZxwd0sRhXt6sKrH5C99/7NZJ9G8H7hgzvM8e2PUoecviBQAoGbF62VbD+dpB/vf3NheZDy1x/G3sfoor1t7KK/PAzeHY35X7jVZ+Xeh3D4UdedxgKiDgIQSEvgfIrfh+Ldj9shHE51TDiZaG/fbt95f5T9jzpe/ZfMH+51HxynHRl2gwAEhhBY/UWWm/9n+/mQ9bFrVi9XIYSjKd5iJz06eAzQ9Z/BmR047w6TvuF6/9YH9x3HBLFjSR0ExiVw9exfv2x9lfLKpQj29p4mfaN9DOzq0Nz75UFwfn+QdL1/61w4WYbwhiOClKPLXhDIR+DqZzdutvqB2euhP79ZydUFf7zllsc5v+U1hEJxor17E6vD8y03exmce+F9WP3p33/8eYng3KkLvnduebLt3OlUZzBD4LMGAhB4nMDqr2r762e/8z7sP1a1evZ98GfBLU+nPhpYl2PRol3XPP8OAQhAwAIBRGshJXqEAARME0C0puOjeQhAwAIBRGshJXqEAARME0C0puOjeQhAwAIBRGshJXqEAARME0C0puOjeQhAwAIBRGshJXqEAARME0C0puOjeQhAwAIBRGshJXqEAARME0C0puOjeQhAwAIBRGshJXqEAARME0C0puOjeQhAwAIBRGshJXqEAARME0C0puOjeQhAwAIBRGshJXqEAARME0C0puOjeQhAwAIBRGshJXqEAARME/g/hNPTXzZh21YAAAAASUVORK5CYII=');\n  background-position: center center;\n  background-size: 100%;\n  background-repeat: no-repeat;\n}\n", ""]);
+
+// exports
+
+
+/***/ },
+/* 7 */
+/***/ function(module, exports) {
+
+/*
+	MIT License http://www.opensource.org/licenses/mit-license.php
+	Author Tobias Koppers @sokra
+*/
+// css base code, injected by the css-loader
+module.exports = function() {
+	var list = [];
+
+	// return the list of modules as css string
+	list.toString = function toString() {
+		var result = [];
+		for(var i = 0; i < this.length; i++) {
+			var item = this[i];
+			if(item[2]) {
+				result.push("@media " + item[2] + "{" + item[1] + "}");
+			} else {
+				result.push(item[1]);
+			}
+		}
+		return result.join("");
+	};
+
+	// import a list of modules into the list
+	list.i = function(modules, mediaQuery) {
+		if(typeof modules === "string")
+			modules = [[null, modules, ""]];
+		var alreadyImportedModules = {};
+		for(var i = 0; i < this.length; i++) {
+			var id = this[i][0];
+			if(typeof id === "number")
+				alreadyImportedModules[id] = true;
+		}
+		for(i = 0; i < modules.length; i++) {
+			var item = modules[i];
+			// skip already imported module
+			// this implementation is not 100% perfect for weird media query combinations
+			//  when a module is imported multiple times with different media queries.
+			//  I hope this will never occur (Hey this way we have smaller bundles)
+			if(typeof item[0] !== "number" || !alreadyImportedModules[item[0]]) {
+				if(mediaQuery && !item[2]) {
+					item[2] = mediaQuery;
+				} else if(mediaQuery) {
+					item[2] = "(" + item[2] + ") and (" + mediaQuery + ")";
+				}
+				list.push(item);
+			}
+		}
+	};
+	return list;
+};
+
+
+/***/ },
+/* 8 */
+/***/ function(module, exports) {
+
+module.exports = "<div class=\"vc-backtop-component\">\n        <a href=\"javascript:\" v-el:btn class=\"iconfont icon-top\" :style=\"style\" @click=\"backTop\" v-show=\"show\">\n            <i :style=\"{width: iconWidth, height: iconHeight}\"></i>\n        </a>\n    </div>";
+
+/***/ },
+/* 9 */
 /***/ function(module, exports) {
 
 var g;
@@ -11620,855 +10721,314 @@ module.exports = g;
 
 
 /***/ },
-/* 40 */
+/* 10 */
 /***/ function(module, exports) {
 
-module.exports = function(module) {
-	if(!module.webpackPolyfill) {
-		module.deprecate = function() {};
-		module.paths = [];
-		// module.parent = undefined by default
-		if(!module.children) module.children = [];
-		Object.defineProperty(module, "loaded", {
-			enumerable: true,
-			configurable: false,
-			get: function() { return module.l; }
-		});
-		Object.defineProperty(module, "id", {
-			enumerable: true,
-			configurable: false,
-			get: function() { return module.i; }
-		});
-		module.webpackPolyfill = 1;
-	}
-	return module;
+"use strict";
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+// <template>
+//     <div class="vc-backtop-component">
+//         <a href="javascript:" v-el:btn class="iconfont icon-top" :style="style" @click="backTop" v-show="show">
+//             <i :style="{width: iconWidth, height: iconHeight}"></i>
+//         </a>
+//     </div>
+// </template>
+
+// <style>
+//     .icon-top {
+//         position: fixed;
+//         z-index: 9999;
+//         background-color: #676262;
+//         border-radius: 50%;
+//         opacity: .7;
+//     }
+//     .icon-top:hover {
+//         opacity: .95;
+//     }
+//     .icon-top:hover i {
+//         top: 17px;
+//     }
+//     .icon-top > i {
+//         display: inline-block;
+//         color: #fff;
+//         margin: 0;
+//         position: absolute;
+//         top: 45%;
+//         left: 50%;
+//         -webkit-transform: translate(-50%, -50%);
+//         -moz-transform: translate(-50%, -50%);
+//         transform: translate(-50%, -50%);
+//         -webkit-transition: all 0.3s ease;
+//         -moz-transition: all 0.3s ease;
+//         transition: all 0.3s ease;
+//         background-image: url('data:image/png;base64,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');
+//         background-position: center center;
+//         background-size: 100%;
+//         background-repeat: no-repeat;
+//     }
+// </style>
+
+// <script>
+/**
+    * 工具方法
+    */
+/*
+* 频率控制 返回函数连续调用时，fn 执行频率限定为每多少时间执行一次
+* @param fn {function}  需要调用的函数
+* @param delay {number}    延迟时间，单位毫秒
+* @param immediate {bool} 给 immediate参数传递false 绑定的函数先执行，而不是delay后后执行。
+* @return {function}实际调用函数
+*/
+var throttle = function throttle(fn, delay, immediate, debounce) {
+    var curr = +new Date(),
+        //当前事件
+    last_call = 0,
+        last_exec = 0,
+        timer = null,
+        diff,
+        //时间差
+    context,
+        //上下文
+    args,
+        exec = function exec() {
+        last_exec = curr;
+        fn.apply(context, args);
+    };
+    return function () {
+        curr = +new Date();
+        context = this, args = arguments, diff = curr - (debounce ? last_call : last_exec) - delay;
+        clearTimeout(timer);
+        if (debounce) {
+            if (immediate) {
+                timer = setTimeout(exec, delay);
+            } else if (diff >= 0) {
+                exec();
+            }
+        } else {
+            if (diff >= 0) {
+                exec();
+            } else if (immediate) {
+                timer = setTimeout(exec, -diff);
+            }
+        }
+        last_call = curr;
+    };
+};
+
+/*
+* 空闲控制 返回函数连续调用时，空闲时间必须大于或等于 delay，fn 才会执行
+* @param fn {function}  要调用的函数
+* @param delay   {number}    空闲时间
+* @param immediate  {bool} 给 immediate参数传递false 绑定的函数先执行，而不是delay后后执行。
+* @return {function}实际调用函数
+*/
+var debounce = function debounce(fn, delay, immediate) {
+    return throttle(fn, delay, immediate, true);
+};
+
+function getScrollTop() {
+    //取得滚动条的竖直距离  
+    return document.documentElement.scrollTop || document.body.scrollTop;
 }
 
-
-/***/ },
-/* 41 */
-/***/ function(module, exports, __webpack_require__) {
-
-var core  = __webpack_require__(7)
-  , $JSON = core.JSON || (core.JSON = {stringify: JSON.stringify});
-module.exports = function stringify(it){ // eslint-disable-line no-unused-vars
-  return $JSON.stringify.apply($JSON, arguments);
-};
-
-/***/ },
-/* 42 */
-/***/ function(module, exports, __webpack_require__) {
-
-__webpack_require__(66);
-var $Object = __webpack_require__(7).Object;
-module.exports = function defineProperty(it, key, desc){
-  return $Object.defineProperty(it, key, desc);
-};
-
-/***/ },
-/* 43 */
-/***/ function(module, exports, __webpack_require__) {
-
-__webpack_require__(69);
-__webpack_require__(67);
-__webpack_require__(70);
-__webpack_require__(71);
-module.exports = __webpack_require__(7).Symbol;
-
-/***/ },
-/* 44 */
-/***/ function(module, exports, __webpack_require__) {
-
-__webpack_require__(68);
-__webpack_require__(72);
-module.exports = __webpack_require__(26).f('iterator');
-
-/***/ },
-/* 45 */
-/***/ function(module, exports) {
-
-module.exports = function(it){
-  if(typeof it != 'function')throw TypeError(it + ' is not a function!');
-  return it;
-};
-
-/***/ },
-/* 46 */
-/***/ function(module, exports) {
-
-module.exports = function(){ /* empty */ };
-
-/***/ },
-/* 47 */
-/***/ function(module, exports, __webpack_require__) {
-
-// false -> Array#indexOf
-// true  -> Array#includes
-var toIObject = __webpack_require__(4)
-  , toLength  = __webpack_require__(63)
-  , toIndex   = __webpack_require__(62);
-module.exports = function(IS_INCLUDES){
-  return function($this, el, fromIndex){
-    var O      = toIObject($this)
-      , length = toLength(O.length)
-      , index  = toIndex(fromIndex, length)
-      , value;
-    // Array#includes uses SameValueZero equality algorithm
-    if(IS_INCLUDES && el != el)while(length > index){
-      value = O[index++];
-      if(value != value)return true;
-    // Array#toIndex ignores holes, Array#includes - not
-    } else for(;length > index; index++)if(IS_INCLUDES || index in O){
-      if(O[index] === el)return IS_INCLUDES || index || 0;
-    } return !IS_INCLUDES && -1;
-  };
-};
-
-/***/ },
-/* 48 */
-/***/ function(module, exports, __webpack_require__) {
-
-// optional / simple context binding
-var aFunction = __webpack_require__(45);
-module.exports = function(fn, that, length){
-  aFunction(fn);
-  if(that === undefined)return fn;
-  switch(length){
-    case 1: return function(a){
-      return fn.call(that, a);
-    };
-    case 2: return function(a, b){
-      return fn.call(that, a, b);
-    };
-    case 3: return function(a, b, c){
-      return fn.call(that, a, b, c);
-    };
-  }
-  return function(/* ...args */){
-    return fn.apply(that, arguments);
-  };
-};
-
-/***/ },
-/* 49 */
-/***/ function(module, exports, __webpack_require__) {
-
-// all enumerable object keys, includes symbols
-var getKeys = __webpack_require__(11)
-  , gOPS    = __webpack_require__(33)
-  , pIE     = __webpack_require__(19);
-module.exports = function(it){
-  var result     = getKeys(it)
-    , getSymbols = gOPS.f;
-  if(getSymbols){
-    var symbols = getSymbols(it)
-      , isEnum  = pIE.f
-      , i       = 0
-      , key;
-    while(symbols.length > i)if(isEnum.call(it, key = symbols[i++]))result.push(key);
-  } return result;
-};
-
-/***/ },
-/* 50 */
-/***/ function(module, exports, __webpack_require__) {
-
-module.exports = __webpack_require__(0).document && document.documentElement;
-
-/***/ },
-/* 51 */
-/***/ function(module, exports, __webpack_require__) {
-
-// fallback for non-array-like ES3 and non-enumerable old V8 strings
-var cof = __webpack_require__(27);
-module.exports = Object('z').propertyIsEnumerable(0) ? Object : function(it){
-  return cof(it) == 'String' ? it.split('') : Object(it);
-};
-
-/***/ },
-/* 52 */
-/***/ function(module, exports, __webpack_require__) {
-
-// 7.2.2 IsArray(argument)
-var cof = __webpack_require__(27);
-module.exports = Array.isArray || function isArray(arg){
-  return cof(arg) == 'Array';
-};
-
-/***/ },
-/* 53 */
-/***/ function(module, exports, __webpack_require__) {
-
-"use strict";
-'use strict';
-var create         = __webpack_require__(31)
-  , descriptor     = __webpack_require__(12)
-  , setToStringTag = __webpack_require__(20)
-  , IteratorPrototype = {};
-
-// 25.1.2.1.1 %IteratorPrototype%[@@iterator]()
-__webpack_require__(5)(IteratorPrototype, __webpack_require__(6)('iterator'), function(){ return this; });
-
-module.exports = function(Constructor, NAME, next){
-  Constructor.prototype = create(IteratorPrototype, {next: descriptor(1, next)});
-  setToStringTag(Constructor, NAME + ' Iterator');
-};
-
-/***/ },
-/* 54 */
-/***/ function(module, exports) {
-
-module.exports = function(done, value){
-  return {value: value, done: !!done};
-};
-
-/***/ },
-/* 55 */
-/***/ function(module, exports, __webpack_require__) {
-
-var getKeys   = __webpack_require__(11)
-  , toIObject = __webpack_require__(4);
-module.exports = function(object, el){
-  var O      = toIObject(object)
-    , keys   = getKeys(O)
-    , length = keys.length
-    , index  = 0
-    , key;
-  while(length > index)if(O[key = keys[index++]] === el)return key;
-};
-
-/***/ },
-/* 56 */
-/***/ function(module, exports, __webpack_require__) {
-
-var META     = __webpack_require__(13)('meta')
-  , isObject = __webpack_require__(10)
-  , has      = __webpack_require__(2)
-  , setDesc  = __webpack_require__(3).f
-  , id       = 0;
-var isExtensible = Object.isExtensible || function(){
-  return true;
-};
-var FREEZE = !__webpack_require__(9)(function(){
-  return isExtensible(Object.preventExtensions({}));
-});
-var setMeta = function(it){
-  setDesc(it, META, {value: {
-    i: 'O' + ++id, // object ID
-    w: {}          // weak collections IDs
-  }});
-};
-var fastKey = function(it, create){
-  // return primitive with prefix
-  if(!isObject(it))return typeof it == 'symbol' ? it : (typeof it == 'string' ? 'S' : 'P') + it;
-  if(!has(it, META)){
-    // can't set metadata to uncaught frozen object
-    if(!isExtensible(it))return 'F';
-    // not necessary to add metadata
-    if(!create)return 'E';
-    // add missing metadata
-    setMeta(it);
-  // return object ID
-  } return it[META].i;
-};
-var getWeak = function(it, create){
-  if(!has(it, META)){
-    // can't set metadata to uncaught frozen object
-    if(!isExtensible(it))return true;
-    // not necessary to add metadata
-    if(!create)return false;
-    // add missing metadata
-    setMeta(it);
-  // return hash weak collections IDs
-  } return it[META].w;
-};
-// add metadata on freeze-family methods calling
-var onFreeze = function(it){
-  if(FREEZE && meta.NEED && isExtensible(it) && !has(it, META))setMeta(it);
-  return it;
-};
-var meta = module.exports = {
-  KEY:      META,
-  NEED:     false,
-  fastKey:  fastKey,
-  getWeak:  getWeak,
-  onFreeze: onFreeze
-};
-
-/***/ },
-/* 57 */
-/***/ function(module, exports, __webpack_require__) {
-
-var dP       = __webpack_require__(3)
-  , anObject = __webpack_require__(8)
-  , getKeys  = __webpack_require__(11);
-
-module.exports = __webpack_require__(1) ? Object.defineProperties : function defineProperties(O, Properties){
-  anObject(O);
-  var keys   = getKeys(Properties)
-    , length = keys.length
-    , i = 0
-    , P;
-  while(length > i)dP.f(O, P = keys[i++], Properties[P]);
-  return O;
-};
-
-/***/ },
-/* 58 */
-/***/ function(module, exports, __webpack_require__) {
-
-var pIE            = __webpack_require__(19)
-  , createDesc     = __webpack_require__(12)
-  , toIObject      = __webpack_require__(4)
-  , toPrimitive    = __webpack_require__(24)
-  , has            = __webpack_require__(2)
-  , IE8_DOM_DEFINE = __webpack_require__(29)
-  , gOPD           = Object.getOwnPropertyDescriptor;
-
-exports.f = __webpack_require__(1) ? gOPD : function getOwnPropertyDescriptor(O, P){
-  O = toIObject(O);
-  P = toPrimitive(P, true);
-  if(IE8_DOM_DEFINE)try {
-    return gOPD(O, P);
-  } catch(e){ /* empty */ }
-  if(has(O, P))return createDesc(!pIE.f.call(O, P), O[P]);
-};
-
-/***/ },
-/* 59 */
-/***/ function(module, exports, __webpack_require__) {
-
-// fallback for IE11 buggy Object.getOwnPropertyNames with iframe and window
-var toIObject = __webpack_require__(4)
-  , gOPN      = __webpack_require__(32).f
-  , toString  = {}.toString;
-
-var windowNames = typeof window == 'object' && window && Object.getOwnPropertyNames
-  ? Object.getOwnPropertyNames(window) : [];
-
-var getWindowNames = function(it){
-  try {
-    return gOPN(it);
-  } catch(e){
-    return windowNames.slice();
-  }
-};
-
-module.exports.f = function getOwnPropertyNames(it){
-  return windowNames && toString.call(it) == '[object Window]' ? getWindowNames(it) : gOPN(toIObject(it));
-};
-
-
-/***/ },
-/* 60 */
-/***/ function(module, exports, __webpack_require__) {
-
-// 19.1.2.9 / 15.2.3.2 Object.getPrototypeOf(O)
-var has         = __webpack_require__(2)
-  , toObject    = __webpack_require__(64)
-  , IE_PROTO    = __webpack_require__(21)('IE_PROTO')
-  , ObjectProto = Object.prototype;
-
-module.exports = Object.getPrototypeOf || function(O){
-  O = toObject(O);
-  if(has(O, IE_PROTO))return O[IE_PROTO];
-  if(typeof O.constructor == 'function' && O instanceof O.constructor){
-    return O.constructor.prototype;
-  } return O instanceof Object ? ObjectProto : null;
-};
-
-/***/ },
-/* 61 */
-/***/ function(module, exports, __webpack_require__) {
-
-var toInteger = __webpack_require__(23)
-  , defined   = __webpack_require__(14);
-// true  -> String#at
-// false -> String#codePointAt
-module.exports = function(TO_STRING){
-  return function(that, pos){
-    var s = String(defined(that))
-      , i = toInteger(pos)
-      , l = s.length
-      , a, b;
-    if(i < 0 || i >= l)return TO_STRING ? '' : undefined;
-    a = s.charCodeAt(i);
-    return a < 0xd800 || a > 0xdbff || i + 1 === l || (b = s.charCodeAt(i + 1)) < 0xdc00 || b > 0xdfff
-      ? TO_STRING ? s.charAt(i) : a
-      : TO_STRING ? s.slice(i, i + 2) : (a - 0xd800 << 10) + (b - 0xdc00) + 0x10000;
-  };
-};
-
-/***/ },
-/* 62 */
-/***/ function(module, exports, __webpack_require__) {
-
-var toInteger = __webpack_require__(23)
-  , max       = Math.max
-  , min       = Math.min;
-module.exports = function(index, length){
-  index = toInteger(index);
-  return index < 0 ? max(index + length, 0) : min(index, length);
-};
-
-/***/ },
-/* 63 */
-/***/ function(module, exports, __webpack_require__) {
-
-// 7.1.15 ToLength
-var toInteger = __webpack_require__(23)
-  , min       = Math.min;
-module.exports = function(it){
-  return it > 0 ? min(toInteger(it), 0x1fffffffffffff) : 0; // pow(2, 53) - 1 == 9007199254740991
-};
-
-/***/ },
-/* 64 */
-/***/ function(module, exports, __webpack_require__) {
-
-// 7.1.13 ToObject(argument)
-var defined = __webpack_require__(14);
-module.exports = function(it){
-  return Object(defined(it));
-};
-
-/***/ },
-/* 65 */
-/***/ function(module, exports, __webpack_require__) {
-
-"use strict";
-'use strict';
-var addToUnscopables = __webpack_require__(46)
-  , step             = __webpack_require__(54)
-  , Iterators        = __webpack_require__(17)
-  , toIObject        = __webpack_require__(4);
-
-// 22.1.3.4 Array.prototype.entries()
-// 22.1.3.13 Array.prototype.keys()
-// 22.1.3.29 Array.prototype.values()
-// 22.1.3.30 Array.prototype[@@iterator]()
-module.exports = __webpack_require__(30)(Array, 'Array', function(iterated, kind){
-  this._t = toIObject(iterated); // target
-  this._i = 0;                   // next index
-  this._k = kind;                // kind
-// 22.1.5.2.1 %ArrayIteratorPrototype%.next()
-}, function(){
-  var O     = this._t
-    , kind  = this._k
-    , index = this._i++;
-  if(!O || index >= O.length){
-    this._t = undefined;
-    return step(1);
-  }
-  if(kind == 'keys'  )return step(0, index);
-  if(kind == 'values')return step(0, O[index]);
-  return step(0, [index, O[index]]);
-}, 'values');
-
-// argumentsList[@@iterator] is %ArrayProto_values% (9.4.4.6, 9.4.4.7)
-Iterators.Arguments = Iterators.Array;
-
-addToUnscopables('keys');
-addToUnscopables('values');
-addToUnscopables('entries');
-
-/***/ },
-/* 66 */
-/***/ function(module, exports, __webpack_require__) {
-
-var $export = __webpack_require__(16);
-// 19.1.2.4 / 15.2.3.6 Object.defineProperty(O, P, Attributes)
-$export($export.S + $export.F * !__webpack_require__(1), 'Object', {defineProperty: __webpack_require__(3).f});
-
-/***/ },
-/* 67 */
-/***/ function(module, exports) {
-
-
-
-/***/ },
-/* 68 */
-/***/ function(module, exports, __webpack_require__) {
-
-"use strict";
-'use strict';
-var $at  = __webpack_require__(61)(true);
-
-// 21.1.3.27 String.prototype[@@iterator]()
-__webpack_require__(30)(String, 'String', function(iterated){
-  this._t = String(iterated); // target
-  this._i = 0;                // next index
-// 21.1.5.2.1 %StringIteratorPrototype%.next()
-}, function(){
-  var O     = this._t
-    , index = this._i
-    , point;
-  if(index >= O.length)return {value: undefined, done: true};
-  point = $at(O, index);
-  this._i += point.length;
-  return {value: point, done: false};
-});
-
-/***/ },
-/* 69 */
-/***/ function(module, exports, __webpack_require__) {
-
-"use strict";
-'use strict';
-// ECMAScript 6 symbols shim
-var global         = __webpack_require__(0)
-  , has            = __webpack_require__(2)
-  , DESCRIPTORS    = __webpack_require__(1)
-  , $export        = __webpack_require__(16)
-  , redefine       = __webpack_require__(35)
-  , META           = __webpack_require__(56).KEY
-  , $fails         = __webpack_require__(9)
-  , shared         = __webpack_require__(22)
-  , setToStringTag = __webpack_require__(20)
-  , uid            = __webpack_require__(13)
-  , wks            = __webpack_require__(6)
-  , wksExt         = __webpack_require__(26)
-  , wksDefine      = __webpack_require__(25)
-  , keyOf          = __webpack_require__(55)
-  , enumKeys       = __webpack_require__(49)
-  , isArray        = __webpack_require__(52)
-  , anObject       = __webpack_require__(8)
-  , toIObject      = __webpack_require__(4)
-  , toPrimitive    = __webpack_require__(24)
-  , createDesc     = __webpack_require__(12)
-  , _create        = __webpack_require__(31)
-  , gOPNExt        = __webpack_require__(59)
-  , $GOPD          = __webpack_require__(58)
-  , $DP            = __webpack_require__(3)
-  , $keys          = __webpack_require__(11)
-  , gOPD           = $GOPD.f
-  , dP             = $DP.f
-  , gOPN           = gOPNExt.f
-  , $Symbol        = global.Symbol
-  , $JSON          = global.JSON
-  , _stringify     = $JSON && $JSON.stringify
-  , PROTOTYPE      = 'prototype'
-  , HIDDEN         = wks('_hidden')
-  , TO_PRIMITIVE   = wks('toPrimitive')
-  , isEnum         = {}.propertyIsEnumerable
-  , SymbolRegistry = shared('symbol-registry')
-  , AllSymbols     = shared('symbols')
-  , OPSymbols      = shared('op-symbols')
-  , ObjectProto    = Object[PROTOTYPE]
-  , USE_NATIVE     = typeof $Symbol == 'function'
-  , QObject        = global.QObject;
-// Don't use setters in Qt Script, https://github.com/zloirock/core-js/issues/173
-var setter = !QObject || !QObject[PROTOTYPE] || !QObject[PROTOTYPE].findChild;
-
-// fallback for old Android, https://code.google.com/p/v8/issues/detail?id=687
-var setSymbolDesc = DESCRIPTORS && $fails(function(){
-  return _create(dP({}, 'a', {
-    get: function(){ return dP(this, 'a', {value: 7}).a; }
-  })).a != 7;
-}) ? function(it, key, D){
-  var protoDesc = gOPD(ObjectProto, key);
-  if(protoDesc)delete ObjectProto[key];
-  dP(it, key, D);
-  if(protoDesc && it !== ObjectProto)dP(ObjectProto, key, protoDesc);
-} : dP;
-
-var wrap = function(tag){
-  var sym = AllSymbols[tag] = _create($Symbol[PROTOTYPE]);
-  sym._k = tag;
-  return sym;
-};
-
-var isSymbol = USE_NATIVE && typeof $Symbol.iterator == 'symbol' ? function(it){
-  return typeof it == 'symbol';
-} : function(it){
-  return it instanceof $Symbol;
-};
-
-var $defineProperty = function defineProperty(it, key, D){
-  if(it === ObjectProto)$defineProperty(OPSymbols, key, D);
-  anObject(it);
-  key = toPrimitive(key, true);
-  anObject(D);
-  if(has(AllSymbols, key)){
-    if(!D.enumerable){
-      if(!has(it, HIDDEN))dP(it, HIDDEN, createDesc(1, {}));
-      it[HIDDEN][key] = true;
-    } else {
-      if(has(it, HIDDEN) && it[HIDDEN][key])it[HIDDEN][key] = false;
-      D = _create(D, {enumerable: createDesc(0, false)});
-    } return setSymbolDesc(it, key, D);
-  } return dP(it, key, D);
-};
-var $defineProperties = function defineProperties(it, P){
-  anObject(it);
-  var keys = enumKeys(P = toIObject(P))
-    , i    = 0
-    , l = keys.length
-    , key;
-  while(l > i)$defineProperty(it, key = keys[i++], P[key]);
-  return it;
-};
-var $create = function create(it, P){
-  return P === undefined ? _create(it) : $defineProperties(_create(it), P);
-};
-var $propertyIsEnumerable = function propertyIsEnumerable(key){
-  var E = isEnum.call(this, key = toPrimitive(key, true));
-  if(this === ObjectProto && has(AllSymbols, key) && !has(OPSymbols, key))return false;
-  return E || !has(this, key) || !has(AllSymbols, key) || has(this, HIDDEN) && this[HIDDEN][key] ? E : true;
-};
-var $getOwnPropertyDescriptor = function getOwnPropertyDescriptor(it, key){
-  it  = toIObject(it);
-  key = toPrimitive(key, true);
-  if(it === ObjectProto && has(AllSymbols, key) && !has(OPSymbols, key))return;
-  var D = gOPD(it, key);
-  if(D && has(AllSymbols, key) && !(has(it, HIDDEN) && it[HIDDEN][key]))D.enumerable = true;
-  return D;
-};
-var $getOwnPropertyNames = function getOwnPropertyNames(it){
-  var names  = gOPN(toIObject(it))
-    , result = []
-    , i      = 0
-    , key;
-  while(names.length > i){
-    if(!has(AllSymbols, key = names[i++]) && key != HIDDEN && key != META)result.push(key);
-  } return result;
-};
-var $getOwnPropertySymbols = function getOwnPropertySymbols(it){
-  var IS_OP  = it === ObjectProto
-    , names  = gOPN(IS_OP ? OPSymbols : toIObject(it))
-    , result = []
-    , i      = 0
-    , key;
-  while(names.length > i){
-    if(has(AllSymbols, key = names[i++]) && (IS_OP ? has(ObjectProto, key) : true))result.push(AllSymbols[key]);
-  } return result;
-};
-
-// 19.4.1.1 Symbol([description])
-if(!USE_NATIVE){
-  $Symbol = function Symbol(){
-    if(this instanceof $Symbol)throw TypeError('Symbol is not a constructor!');
-    var tag = uid(arguments.length > 0 ? arguments[0] : undefined);
-    var $set = function(value){
-      if(this === ObjectProto)$set.call(OPSymbols, value);
-      if(has(this, HIDDEN) && has(this[HIDDEN], tag))this[HIDDEN][tag] = false;
-      setSymbolDesc(this, tag, createDesc(1, value));
-    };
-    if(DESCRIPTORS && setter)setSymbolDesc(ObjectProto, tag, {configurable: true, set: $set});
-    return wrap(tag);
-  };
-  redefine($Symbol[PROTOTYPE], 'toString', function toString(){
-    return this._k;
-  });
-
-  $GOPD.f = $getOwnPropertyDescriptor;
-  $DP.f   = $defineProperty;
-  __webpack_require__(32).f = gOPNExt.f = $getOwnPropertyNames;
-  __webpack_require__(19).f  = $propertyIsEnumerable;
-  __webpack_require__(33).f = $getOwnPropertySymbols;
-
-  if(DESCRIPTORS && !__webpack_require__(18)){
-    redefine(ObjectProto, 'propertyIsEnumerable', $propertyIsEnumerable, true);
-  }
-
-  wksExt.f = function(name){
-    return wrap(wks(name));
-  }
+function setScrollTop(value) {
+    //设置滚动条的竖直距离,实现效果的关键就是在很短的间隔时间内不断地修改滚动条的竖直距离,以实现滚动效果  
+    document.documentElement.scrollTop = value;
+    document.body.scrollTop = value;
 }
 
-$export($export.G + $export.W + $export.F * !USE_NATIVE, {Symbol: $Symbol});
+var DEFAULT_SIZE = 50;
 
-for(var symbols = (
-  // 19.4.2.2, 19.4.2.3, 19.4.2.4, 19.4.2.6, 19.4.2.8, 19.4.2.9, 19.4.2.10, 19.4.2.11, 19.4.2.12, 19.4.2.13, 19.4.2.14
-  'hasInstance,isConcatSpreadable,iterator,match,replace,search,species,split,toPrimitive,toStringTag,unscopables'
-).split(','), i = 0; symbols.length > i; )wks(symbols[i++]);
+exports.default = {
+    name: 'vc-backtop',
+    props: {
+        style: {
+            type: Object,
+            default: function _default() {
+                return {
+                    width: DEFAULT_SIZE + 'px',
+                    height: DEFAULT_SIZE + 'px',
+                    top: 'auto',
+                    left: 'auto',
+                    right: '30px',
+                    bottom: '40px'
+                };
+            }
+        },
+        scrollingHide: {
+            type: Boolean,
+            default: false
+        },
+        interval: {
+            type: [Number, String],
+            default: 32
+        },
+        scrollbarOffset: {
+            type: [Number, String],
+            default: 100
+        },
+        acceleration: {
+            type: [Number, String],
+            default: .5
+        },
+        time: {
+            type: [Number, String],
+            default: 10
+        },
+        mode: { // 动画模式
+            type: String,
+            default: 'raf'
+        }
+    },
+    data: function data() {
+        return {
+            btn: null,
+            show: false
+        };
+    },
+    ready: function ready() {
+        var _this = this;
 
-for(var symbols = $keys(wks.store), i = 0; symbols.length > i; )wksDefine(symbols[i++]);
+        this.btn = this.$els.btn;
+        setTimeout(function () {
+            _this.bindEvent();
+        });
+    },
 
-$export($export.S + $export.F * !USE_NATIVE, 'Symbol', {
-  // 19.4.2.1 Symbol.for(key)
-  'for': function(key){
-    return has(SymbolRegistry, key += '')
-      ? SymbolRegistry[key]
-      : SymbolRegistry[key] = $Symbol(key);
-  },
-  // 19.4.2.5 Symbol.keyFor(sym)
-  keyFor: function keyFor(key){
-    if(isSymbol(key))return keyOf(SymbolRegistry, key);
-    throw TypeError(key + ' is not a symbol!');
-  },
-  useSetter: function(){ setter = true; },
-  useSimple: function(){ setter = false; }
-});
+    methods: {
+        bindEvent: function bindEvent() {
+            var btn = this.btn;
+            window.addEventListener('scroll', this.scrollHandler, false);
+        },
+        scrollHandler: function scrollHandler() {
+            if (this.scrollingHide) {
+                this.show = false;
+                this._timer && clearTimeout(this._timer);
+                this._timer = setTimeout(function () {
+                    return throttle(this.scrollSpy, +this.interval)();
+                }.bind(this), 250);
+                return;
+            }
+            return throttle(this.scrollSpy, +this.interval)();
+        },
+        scrollSpy: function scrollSpy() {
+            var scrollTop = getScrollTop();
+            if (scrollTop > this.scrollbarOffset) {
+                // 判断滚动条距离窗口顶部多远时显示出来，这里是100px
+                this.show = true;
+            } else {
+                this.show = false;
+            }
+        },
+        backTop: function backTop(acceleration, time) {
+            var _this2 = this;
 
-$export($export.S + $export.F * !USE_NATIVE, 'Object', {
-  // 19.1.2.2 Object.create(O [, Properties])
-  create: $create,
-  // 19.1.2.4 Object.defineProperty(O, P, Attributes)
-  defineProperty: $defineProperty,
-  // 19.1.2.3 Object.defineProperties(O, Properties)
-  defineProperties: $defineProperties,
-  // 19.1.2.6 Object.getOwnPropertyDescriptor(O, P)
-  getOwnPropertyDescriptor: $getOwnPropertyDescriptor,
-  // 19.1.2.7 Object.getOwnPropertyNames(O)
-  getOwnPropertyNames: $getOwnPropertyNames,
-  // 19.1.2.8 Object.getOwnPropertySymbols(O)
-  getOwnPropertySymbols: $getOwnPropertySymbols
-});
+            //修改参数可调整返回顶部的速度  
+            var speed = 1 + this.acceleration;
+            if (this.mode !== 'raf') {
+                (function () {
+                    var timer = setInterval(function () {
+                        setScrollTop(Math.floor(getScrollTop() / speed)); //这行代码是关键，取得滚动条竖直距离，除以speed后再给滚动条设置竖直距离  
+                        if (getScrollTop() == 0) clearInterval(timer);
+                    }, _this2.time);
+                })();
+            } else {
+                requestAnimationFrame(function step() {
+                    setScrollTop(Math.floor(getScrollTop() / speed));
 
-// 24.3.2 JSON.stringify(value [, replacer [, space]])
-$JSON && $export($export.S + $export.F * (!USE_NATIVE || $fails(function(){
-  var S = $Symbol();
-  // MS Edge converts symbol values to JSON as {}
-  // WebKit converts symbol values to JSON as null
-  // V8 throws on boxed symbols
-  return _stringify([S]) != '[null]' || _stringify({a: S}) != '{}' || _stringify(Object(S)) != '{}';
-})), 'JSON', {
-  stringify: function stringify(it){
-    if(it === undefined || isSymbol(it))return; // IE8 returns string on undefined
-    var args = [it]
-      , i    = 1
-      , replacer, $replacer;
-    while(arguments.length > i)args.push(arguments[i++]);
-    replacer = args[1];
-    if(typeof replacer == 'function')$replacer = replacer;
-    if($replacer || !isArray(replacer))replacer = function(key, value){
-      if($replacer)value = $replacer.call(this, key, value);
-      if(!isSymbol(value))return value;
-    };
-    args[1] = replacer;
-    return _stringify.apply($JSON, args);
-  }
-});
-
-// 19.4.3.4 Symbol.prototype[@@toPrimitive](hint)
-$Symbol[PROTOTYPE][TO_PRIMITIVE] || __webpack_require__(5)($Symbol[PROTOTYPE], TO_PRIMITIVE, $Symbol[PROTOTYPE].valueOf);
-// 19.4.3.5 Symbol.prototype[@@toStringTag]
-setToStringTag($Symbol, 'Symbol');
-// 20.2.1.9 Math[@@toStringTag]
-setToStringTag(Math, 'Math', true);
-// 24.3.3 JSON[@@toStringTag]
-setToStringTag(global.JSON, 'JSON', true);
+                    if (getScrollTop() > 0) {
+                        requestAnimationFrame(step);
+                    }
+                });
+            }
+        }
+    },
+    computed: {
+        iconWidth: function iconWidth() {
+            return parseFloat(this.style.width) / 2 + 'px';
+        },
+        iconHeight: function iconHeight() {
+            return parseFloat(this.style.height) / 2 + 'px';
+        }
+    },
+    beforeDestory: function beforeDestory() {
+        window.removeEventListener('scroll', this.scrollHandler, false);
+    }
+};
+// </script>
 
 /***/ },
-/* 70 */
+/* 11 */
 /***/ function(module, exports, __webpack_require__) {
 
-__webpack_require__(25)('asyncIterator');
+__webpack_require__(5)
+module.exports = __webpack_require__(10)
 
-/***/ },
-/* 71 */
-/***/ function(module, exports, __webpack_require__) {
-
-__webpack_require__(25)('observable');
-
-/***/ },
-/* 72 */
-/***/ function(module, exports, __webpack_require__) {
-
-__webpack_require__(65);
-var global        = __webpack_require__(0)
-  , hide          = __webpack_require__(5)
-  , Iterators     = __webpack_require__(17)
-  , TO_STRING_TAG = __webpack_require__(6)('toStringTag');
-
-for(var collections = ['NodeList', 'DOMTokenList', 'MediaList', 'StyleSheetList', 'CSSRuleList'], i = 0; i < 5; i++){
-  var NAME       = collections[i]
-    , Collection = global[NAME]
-    , proto      = Collection && Collection.prototype;
-  if(proto && !proto[TO_STRING_TAG])hide(proto, TO_STRING_TAG, NAME);
-  Iterators[NAME] = Iterators.Array;
+if (module.exports.__esModule) module.exports = module.exports.default
+;(typeof module.exports === "function" ? module.exports.options : module.exports).template = __webpack_require__(8)
+if (false) {
+(function () {
+var hotAPI = require("vue-hot-reload-api")
+hotAPI.install(require("vue"))
+if (!hotAPI.compatible) return
+var id = "-!babel!./../../node_modules/.7.1.7@vue-loader/lib/selector.js?type=script&index=0!./Backtop.vue"
+hotAPI.createRecord(id, module.exports)
+module.hot.accept(["-!babel!./../../node_modules/.7.1.7@vue-loader/lib/selector.js?type=script&index=0!./Backtop.vue","-!vue-html-loader!./../../node_modules/.7.1.7@vue-loader/lib/selector.js?type=template&index=0!./Backtop.vue"], function () {
+var newOptions = require("-!babel!./../../node_modules/.7.1.7@vue-loader/lib/selector.js?type=script&index=0!./Backtop.vue")
+if (newOptions && newOptions.__esModule) newOptions = newOptions.default
+var newTemplate = require("-!vue-html-loader!./../../node_modules/.7.1.7@vue-loader/lib/selector.js?type=template&index=0!./Backtop.vue")
+hotAPI.update(id, newOptions, newTemplate)
+})
+})()
 }
 
 /***/ },
-/* 73 */
-/***/ function(module, exports, __webpack_require__) {
-
-module.exports = { "default": __webpack_require__(41), __esModule: true };
-
-/***/ },
-/* 74 */
-/***/ function(module, exports, __webpack_require__) {
-
-module.exports = { "default": __webpack_require__(42), __esModule: true };
-
-/***/ },
-/* 75 */
-/***/ function(module, exports, __webpack_require__) {
-
-module.exports = { "default": __webpack_require__(43), __esModule: true };
-
-/***/ },
-/* 76 */
-/***/ function(module, exports, __webpack_require__) {
-
-module.exports = { "default": __webpack_require__(44), __esModule: true };
-
-/***/ },
-/* 77 */
-/***/ function(module, exports, __webpack_require__) {
-
-"use strict";
-"use strict";
-
-exports.__esModule = true;
-
-var _iterator = __webpack_require__(76);
-
-var _iterator2 = _interopRequireDefault(_iterator);
-
-var _symbol = __webpack_require__(75);
-
-var _symbol2 = _interopRequireDefault(_symbol);
-
-var _typeof = typeof _symbol2.default === "function" && typeof _iterator2.default === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof _symbol2.default === "function" && obj.constructor === _symbol2.default ? "symbol" : typeof obj; };
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-exports.default = typeof _symbol2.default === "function" && _typeof(_iterator2.default) === "symbol" ? function (obj) {
-  return typeof obj === "undefined" ? "undefined" : _typeof(obj);
-} : function (obj) {
-  return obj && typeof _symbol2.default === "function" && obj.constructor === _symbol2.default ? "symbol" : typeof obj === "undefined" ? "undefined" : _typeof(obj);
-};
-
-/***/ },
-/* 78 */
+/* 12 */
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
 'use strict';
 
-var _vue = __webpack_require__(36);
+var _vue = __webpack_require__(1);
 
 var _vue2 = _interopRequireDefault(_vue);
 
-var _build = __webpack_require__(37);
+var _src = __webpack_require__(2);
 
-var _build2 = _interopRequireDefault(_build);
+var _src2 = _interopRequireDefault(_src);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 new _vue2.default({
-  el: '#app',
-  data: function data() {
-    return {
-      acceleration: .7,
-      scrollbarOffset: "100",
-      interval: 128,
-      style: { "width": "60px", "height": "60px", "left": "auto", "top": "auto", "bottom": "60px", "right": "40px" },
-      styleText: '{ "width": "60px","height": "60px","left":"auto", "top":"auto", "bottom": "60px", "right": "40px" }'
-    };
-  },
-  ready: function ready() {},
+    el: '#app',
+    data: function data() {
+        return {
+            acceleration: .7,
+            scrollbarOffset: "100",
+            interval: 128,
+            scrollingHide: false,
+            style: { "width": "60px", "height": "60px", "left": "auto", "top": "auto", "bottom": "60px", "right": "40px" },
+            styleText: '{ "width": "60px","height": "60px","left":"auto", "top":"auto", "bottom": "60px", "right": "40px" }'
+        };
+    },
+    created: function created() {
+        var scrollingHide = location.href.split('hide=')[1];
+        this.scrollingHide = scrollingHide === 'true' ? true : false;
+    },
+    ready: function ready() {},
 
-  methods: {
-    setStyle: function setStyle() {
-      this.style = JSON.parse(this.styleText);
+    methods: {
+        setStyle: function setStyle() {
+            this.style = JSON.parse(this.styleText);
+        }
+    },
+    components: {
+        vcBacktop: _src2.default
     }
-  },
-  components: {
-    vcBacktop: _build2.default
-  }
 });
 
 /***/ }

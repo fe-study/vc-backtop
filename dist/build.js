@@ -4,9 +4,9 @@
 	else if(typeof define === 'function' && define.amd)
 		define([], factory);
 	else if(typeof exports === 'object')
-		exports["VueComponentsName"] = factory();
+		exports["vcBacktop"] = factory();
 	else
-		root["VueComponentsName"] = factory();
+		root["vcBacktop"] = factory();
 })(this, function() {
 return /******/ (function(modules) { // webpackBootstrap
 /******/ 	// The module cache
@@ -89,12 +89,12 @@ if (false) {
 var hotAPI = require("vue-hot-reload-api")
 hotAPI.install(require("vue"))
 if (!hotAPI.compatible) return
-var id = "-!babel!./../../../node_modules/.7.1.7@vue-loader/lib/selector.js?type=script&index=0!./Backtop.vue"
+var id = "-!babel!./../../node_modules/.7.1.7@vue-loader/lib/selector.js?type=script&index=0!./Backtop.vue"
 hotAPI.createRecord(id, module.exports)
-module.hot.accept(["-!babel!./../../../node_modules/.7.1.7@vue-loader/lib/selector.js?type=script&index=0!./Backtop.vue","-!vue-html-loader!./../../../node_modules/.7.1.7@vue-loader/lib/selector.js?type=template&index=0!./Backtop.vue"], function () {
-var newOptions = require("-!babel!./../../../node_modules/.7.1.7@vue-loader/lib/selector.js?type=script&index=0!./Backtop.vue")
+module.hot.accept(["-!babel!./../../node_modules/.7.1.7@vue-loader/lib/selector.js?type=script&index=0!./Backtop.vue","-!vue-html-loader!./../../node_modules/.7.1.7@vue-loader/lib/selector.js?type=template&index=0!./Backtop.vue"], function () {
+var newOptions = require("-!babel!./../../node_modules/.7.1.7@vue-loader/lib/selector.js?type=script&index=0!./Backtop.vue")
 if (newOptions && newOptions.__esModule) newOptions = newOptions.default
-var newTemplate = require("-!vue-html-loader!./../../../node_modules/.7.1.7@vue-loader/lib/selector.js?type=template&index=0!./Backtop.vue")
+var newTemplate = require("-!vue-html-loader!./../../node_modules/.7.1.7@vue-loader/lib/selector.js?type=template&index=0!./Backtop.vue")
 hotAPI.update(id, newOptions, newTemplate)
 })
 })()
@@ -368,8 +368,8 @@ if(content.locals) module.exports = content.locals;
 if(false) {
 	// When the styles change, update the <style> tags
 	if(!content.locals) {
-		module.hot.accept("!!./../../../node_modules/.0.21.0@css-loader/index.js!./../../../node_modules/.7.1.7@vue-loader/lib/style-rewriter.js?id=_v-0a54d84b&file=Backtop.vue!./../../../node_modules/.2.2.3@less-loader/index.js!./../../../node_modules/.7.1.7@vue-loader/lib/selector.js?type=style&index=0!./Backtop.vue", function() {
-			var newContent = require("!!./../../../node_modules/.0.21.0@css-loader/index.js!./../../../node_modules/.7.1.7@vue-loader/lib/style-rewriter.js?id=_v-0a54d84b&file=Backtop.vue!./../../../node_modules/.2.2.3@less-loader/index.js!./../../../node_modules/.7.1.7@vue-loader/lib/selector.js?type=style&index=0!./Backtop.vue");
+		module.hot.accept("!!./../../node_modules/.0.21.0@css-loader/index.js!./../../node_modules/.7.1.7@vue-loader/lib/style-rewriter.js?id=_v-d39013f0&file=Backtop.vue!./../../node_modules/.2.2.3@less-loader/index.js!./../../node_modules/.7.1.7@vue-loader/lib/selector.js?type=style&index=0!./Backtop.vue", function() {
+			var newContent = require("!!./../../node_modules/.0.21.0@css-loader/index.js!./../../node_modules/.7.1.7@vue-loader/lib/style-rewriter.js?id=_v-d39013f0&file=Backtop.vue!./../../node_modules/.2.2.3@less-loader/index.js!./../../node_modules/.7.1.7@vue-loader/lib/selector.js?type=style&index=0!./Backtop.vue");
 			if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
 			update(newContent);
 		});
@@ -508,13 +508,13 @@ Object.defineProperty(exports, "__esModule", {
 
 // <script>
 /**
- * 工具方法
- */
+    * 工具方法
+    */
 /*
 * 频率控制 返回函数连续调用时，fn 执行频率限定为每多少时间执行一次
 * @param fn {function}  需要调用的函数
-* @param delay  {number}    延迟时间，单位毫秒
-* @param immediate  {bool} 给 immediate参数传递false 绑定的函数先执行，而不是delay后后执行。
+* @param delay {number}    延迟时间，单位毫秒
+* @param immediate {bool} 给 immediate参数传递false 绑定的函数先执行，而不是delay后后执行。
 * @return {function}实际调用函数
 */
 var throttle = function throttle(fn, delay, immediate, debounce) {
@@ -560,10 +560,10 @@ var throttle = function throttle(fn, delay, immediate, debounce) {
 * @param immediate  {bool} 给 immediate参数传递false 绑定的函数先执行，而不是delay后后执行。
 * @return {function}实际调用函数
 */
-
 var debounce = function debounce(fn, delay, immediate) {
     return throttle(fn, delay, immediate, true);
 };
+
 function getScrollTop() {
     //取得滚动条的竖直距离  
     return document.documentElement.scrollTop || document.body.scrollTop;
@@ -578,6 +578,7 @@ function setScrollTop(value) {
 var DEFAULT_SIZE = 50;
 
 exports.default = {
+    name: 'vc-backtop',
     props: {
         style: {
             type: Object,
@@ -592,9 +593,13 @@ exports.default = {
                 };
             }
         },
+        scrollingHide: {
+            type: Boolean,
+            default: false
+        },
         interval: {
             type: [Number, String],
-            default: 128
+            default: 32
         },
         scrollbarOffset: {
             type: [Number, String],
@@ -633,6 +638,17 @@ exports.default = {
             var btn = this.btn;
             window.addEventListener('scroll', this.scrollHandler, false);
         },
+        scrollHandler: function scrollHandler() {
+            if (this.scrollingHide) {
+                this.show = false;
+                this._timer && clearTimeout(this._timer);
+                this._timer = setTimeout(function () {
+                    return throttle(this.scrollSpy, +this.interval)();
+                }.bind(this), 250);
+                return;
+            }
+            return throttle(this.scrollSpy, +this.interval)();
+        },
         scrollSpy: function scrollSpy() {
             var scrollTop = getScrollTop();
             if (scrollTop > this.scrollbarOffset) {
@@ -643,13 +659,17 @@ exports.default = {
             }
         },
         backTop: function backTop(acceleration, time) {
+            var _this2 = this;
+
             //修改参数可调整返回顶部的速度  
             var speed = 1 + this.acceleration;
             if (this.mode !== 'raf') {
-                var timer = setInterval(function () {
-                    setScrollTop(Math.floor(getScrollTop() / speed)); //这行代码是关键，取得滚动条竖直距离，除以speed后再给滚动条设置竖直距离  
-                    if (getScrollTop() == 0) clearInterval(timer);
-                }, this.time);
+                (function () {
+                    var timer = setInterval(function () {
+                        setScrollTop(Math.floor(getScrollTop() / speed)); //这行代码是关键，取得滚动条竖直距离，除以speed后再给滚动条设置竖直距离  
+                        if (getScrollTop() == 0) clearInterval(timer);
+                    }, _this2.time);
+                })();
             } else {
                 requestAnimationFrame(function step() {
                     setScrollTop(Math.floor(getScrollTop() / speed));
@@ -662,9 +682,6 @@ exports.default = {
         }
     },
     computed: {
-        scrollHandler: function scrollHandler() {
-            return throttle(this.scrollSpy, +this.interval);
-        },
         iconWidth: function iconWidth() {
             return parseFloat(this.style.width) / 2 + 'px';
         },

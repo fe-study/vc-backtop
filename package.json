@@ -1,7 +1,7 @@
 {
   "author": "indexxuan@gmail.com",
   "name": "vc-backtop",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "a backtotop component based on vue.js",
   "scripts": {
     "start": "webpack-dev-server --inline --hot --quiet",
@@ -22,10 +22,11 @@
   "bugs": {
       "url": "https://github.com/iwaimai-bi-fe/vc-backtop/issues"
   },
+  "keywords": ["backtop", "gotop", "component", "vue", "bootstrap"],
   "dependencies": {
+    "bootstrap": "^3.3.5",
     "vue": "^1.0.24"
   },
-  "keywords": ["backtop", "gotop", "component", "vue", "bootstrap"],
   "devDependencies": {
     "babel-core": "^6.1.21",
     "babel-loader": "^6.1.0",

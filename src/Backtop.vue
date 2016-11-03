@@ -41,166 +41,179 @@
 </style>
 
 <script>
-    /**
-     * 工具方法
-     */
-     /*
-     * 频率控制 返回函数连续调用时，fn 执行频率限定为每多少时间执行一次
-     * @param fn {function}  需要调用的函数
-     * @param delay  {number}    延迟时间，单位毫秒
-     * @param immediate  {bool} 给 immediate参数传递false 绑定的函数先执行，而不是delay后后执行。
-     * @return {function}实际调用函数
-     */
-    var throttle = function (fn, delay, immediate, debounce) {
-        var curr = +new Date(),//当前事件
-            last_call = 0,
-            last_exec = 0,
-            timer = null,
-            diff, //时间差
-            context,//上下文
-            args,
-            exec = function () {
-                last_exec = curr
-                fn.apply(context, args)
-            }
-        return function () {
-            curr = +new Date()
-            context = this,
-            args = arguments,
-            diff = curr - (debounce ? last_call : last_exec) - delay
-            clearTimeout(timer)
-            if (debounce) {
-                if (immediate) {
-                    timer = setTimeout(exec, delay)
-                } else if (diff >= 0) {
-                    exec()
-                }
-            } else {
-                if (diff >= 0) {
-                    exec()
-                } else if (immediate) {
-                    timer = setTimeout(exec, -diff)
-                }
-            }
-            last_call = curr
-        }
-    }
-
+/**
+    * 工具方法
+    */
     /*
-    * 空闲控制 返回函数连续调用时，空闲时间必须大于或等于 delay，fn 才会执行
-    * @param fn {function}  要调用的函数
-    * @param delay   {number}    空闲时间
-    * @param immediate  {bool} 给 immediate参数传递false 绑定的函数先执行，而不是delay后后执行。
+    * 频率控制 返回函数连续调用时，fn 执行频率限定为每多少时间执行一次
+    * @param fn {function}  需要调用的函数
+    * @param delay {number}    延迟时间，单位毫秒
+    * @param immediate {bool} 给 immediate参数传递false 绑定的函数先执行，而不是delay后后执行。
     * @return {function}实际调用函数
     */
-
-    var debounce = function (fn, delay, immediate) {
-        return throttle(fn, delay, immediate, true)
-    }
-    function getScrollTop() {   //取得滚动条的竖直距离  
-        return document.documentElement.scrollTop || document.body.scrollTop
-    }  
-
-    function setScrollTop (value) {  //设置滚动条的竖直距离,实现效果的关键就是在很短的间隔时间内不断地修改滚动条的竖直距离,以实现滚动效果  
-        document.documentElement.scrollTop = value  
-        document.body.scrollTop = value  
-    }  
-
-    const DEFAULT_SIZE = 50
-
-    export default {
-        props: {
-            style: {
-                type: Object,
-                default () {
-                    return {
-                        width: DEFAULT_SIZE + 'px',
-                        height: DEFAULT_SIZE + 'px',
-                        top: 'auto',
-                        left: 'auto',
-                        right: '30px',
-                        bottom: '40px'
-                    }
-                }
-            },
-            interval: {
-                type: [Number, String],
-                default: 128
-            },
-            scrollbarOffset: {
-                type: [Number, String],
-                default: 100
-            },
-            acceleration: {
-                type: [Number, String],
-                default: .5
-            },
-            time: {
-                type: [Number, String],
-                default: 10
-            },
-            mode: { // 动画模式
-                type: String,
-                default: 'raf'
-            }
-        },
-        data () {
-            return {
-                btn: null,
-                show: false
-            }
-        },
-        ready () {
-            this.btn = this.$els.btn
-            setTimeout(() => {
-                this.bindEvent()
-            })
-        },
-        methods: {
-            bindEvent () {
-                var btn = this.btn
-                window.addEventListener('scroll', this.scrollHandler, false)
-            },
-            scrollSpy () {
-                var scrollTop = getScrollTop()
-                if (scrollTop > this.scrollbarOffset) { // 判断滚动条距离窗口顶部多远时显示出来，这里是100px
-                    this.show = true
-                } else {  
-                    this.show = false
-                }  
-            },
-            backTop (acceleration, time) {     //修改参数可调整返回顶部的速度  
-                var speed = 1 + this.acceleration  
-                if (this.mode !== 'raf') {
-                    var timer = setInterval(() => {  
-                        setScrollTop(Math.floor(getScrollTop() / speed)) //这行代码是关键，取得滚动条竖直距离，除以speed后再给滚动条设置竖直距离  
-                        if (getScrollTop() == 0) 
-                            clearInterval(timer)
-                    }, this.time)
-                } else {
-                    requestAnimationFrame(function step () {
-                        setScrollTop(Math.floor(getScrollTop() / speed))
-
-                        if (getScrollTop() > 0) {
-                            requestAnimationFrame(step)
-                        }
-                    })
-                }
-            } 
-        },
-        computed: {
-            scrollHandler () {
-                return throttle(this.scrollSpy, +this.interval)
-            },
-            iconWidth () {
-                return (parseFloat(this.style.width) / 2) + 'px'
-            },
-            iconHeight () {
-                return (parseFloat(this.style.height) / 2) + 'px'
-            }
-        },
-        beforeDestory () {
-            window.removeEventListener('scroll', this.scrollHandler, false)
+var throttle = function (fn, delay, immediate, debounce) {
+    var curr = +new Date(),//当前事件
+        last_call = 0,
+        last_exec = 0,
+        timer = null,
+        diff, //时间差
+        context,//上下文
+        args,
+        exec = function () {
+            last_exec = curr
+            fn.apply(context, args)
         }
+    return function () {
+        curr = +new Date()
+        context = this,
+        args = arguments,
+        diff = curr - (debounce ? last_call : last_exec) - delay
+        clearTimeout(timer)
+        if (debounce) {
+            if (immediate) {
+                timer = setTimeout(exec, delay)
+            } else if (diff >= 0) {
+                exec()
+            }
+        } else {
+            if (diff >= 0) {
+                exec()
+            } else if (immediate) {
+                timer = setTimeout(exec, -diff)
+            }
+        }
+        last_call = curr
     }
+}
+
+/*
+* 空闲控制 返回函数连续调用时，空闲时间必须大于或等于 delay，fn 才会执行
+* @param fn {function}  要调用的函数
+* @param delay   {number}    空闲时间
+* @param immediate  {bool} 给 immediate参数传递false 绑定的函数先执行，而不是delay后后执行。
+* @return {function}实际调用函数
+*/
+var debounce = function (fn, delay, immediate) {
+    return throttle(fn, delay, immediate, true)
+}
+
+function getScrollTop() {   //取得滚动条的竖直距离  
+    return document.documentElement.scrollTop || document.body.scrollTop
+}  
+
+function setScrollTop (value) {  //设置滚动条的竖直距离,实现效果的关键就是在很短的间隔时间内不断地修改滚动条的竖直距离,以实现滚动效果  
+    document.documentElement.scrollTop = value  
+    document.body.scrollTop = value  
+}  
+
+const DEFAULT_SIZE = 50
+
+export default {
+    name: 'vc-backtop',
+    props: {
+        style: {
+            type: Object,
+            default () {
+                return {
+                    width: DEFAULT_SIZE + 'px',
+                    height: DEFAULT_SIZE + 'px',
+                    top: 'auto',
+                    left: 'auto',
+                    right: '30px',
+                    bottom: '40px'
+                }
+            }
+        },
+        scrollingHide: {
+            type: Boolean,
+            default: false
+        },
+        interval: {
+            type: [Number, String],
+            default: 32
+        },
+        scrollbarOffset: {
+            type: [Number, String],
+            default: 100
+        },
+        acceleration: {
+            type: [Number, String],
+            default: .5
+        },
+        time: {
+            type: [Number, String],
+            default: 10
+        },
+        mode: { // 动画模式
+            type: String,
+            default: 'raf'
+        }
+    },
+    data () {
+        return {
+            btn: null,
+            show: false
+        }
+    },
+    ready () {
+        this.btn = this.$els.btn
+        setTimeout(() => {
+            this.bindEvent()
+        })
+    },
+    methods: {
+        bindEvent () {
+            let btn = this.btn
+            window.addEventListener('scroll', this.scrollHandler, false)
+        },
+        scrollHandler () {
+            if (this.scrollingHide) {
+                this.show = false
+                this._timer && clearTimeout(this._timer)
+                this._timer = setTimeout(function () {
+                    return throttle(this.scrollSpy, +this.interval)()
+                }.bind(this), 250)
+                return
+            }
+            return throttle(this.scrollSpy, +this.interval)()
+        },
+        scrollSpy () {
+            let scrollTop = getScrollTop()
+            if (scrollTop > this.scrollbarOffset) { // 判断滚动条距离窗口顶部多远时显示出来，这里是100px
+                this.show = true
+            } else {  
+                this.show = false
+            }  
+        },
+        backTop (acceleration, time) {     //修改参数可调整返回顶部的速度  
+            let speed = 1 + this.acceleration  
+            if (this.mode !== 'raf') {
+                let timer = setInterval(() => {  
+                    setScrollTop(Math.floor(getScrollTop() / speed)) //这行代码是关键，取得滚动条竖直距离，除以speed后再给滚动条设置竖直距离  
+                    if (getScrollTop() == 0) 
+                        clearInterval(timer)
+                }, this.time)
+            } else {
+                requestAnimationFrame(function step () {
+                    setScrollTop(Math.floor(getScrollTop() / speed))
+
+                    if (getScrollTop() > 0) {
+                        requestAnimationFrame(step)
+                    }
+                })
+            }
+        } 
+    },
+    computed: {
+        iconWidth () {
+            return (parseFloat(this.style.width) / 2) + 'px'
+        },
+        iconHeight () {
+            return (parseFloat(this.style.height) / 2) + 'px'
+        }
+    },
+    beforeDestory () {
+        window.removeEventListener('scroll', this.scrollHandler, false)
+    }
+}
 </script>
